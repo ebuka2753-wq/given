@@ -2,637 +2,218 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>International Giveaway | Rewards</title>
-
-<style>
-* {
-  margin: 0;
-  padding: 0;
-  box-sizing: border-box;
-  font-family: Arial, sans-serif;
-}
-
-body {
-  background: #080d18;
-  color: white;
-}
-
-header {
-  background: #111a2b;
-  padding: 18px 5%;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  border-bottom: 1px solid #b99542;
-}
-
-.logo {
-  color: #e6bd62;
-  font-size: 20px;
-  font-weight: bold;
-}
-
-header button, .btn {
-  background: #d5aa4c;
-  color: #111;
-  padding: 11px 18px;
-  border: none;
-  border-radius: 8px;
-  font-weight: bold;
-  cursor: pointer;
-}
-
-.hero {
-  padding: 55px 20px;
-  text-align: center;
-  background:
-    linear-gradient(120deg, #101a2b, #172b3a);
-}
-
-.hero h1 {
-  font-size: 35px;
-  color: #f2ca70;
-  margin-bottom: 15px;
-}
-
-.hero p {
-  color: #d1d5db;
-  line-height: 1.7;
-}
-
-.money {
-  font-size: 43px;
-  font-weight: bold;
-  color: #e9c46a;
-  margin: 25px 0 8px;
-}
-
-.container {
-  width: 92%;
-  max-width: 1100px;
-  margin: 30px auto;
-}
-
-.section-title {
-  color: #e9c46a;
-  margin: 25px 0 18px;
-  font-size: 22px;
-}
-
-.grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
-  gap: 15px;
-}
-
-.card {
-  background: #121d30;
-  border: 1px solid #283751;
-  border-radius: 13px;
-  padding: 22px 15px;
-  text-align: center;
-}
-
-.card .icon {
-  font-size: 30px;
-  margin-bottom: 12px;
-}
-
-.card h3 {
-  font-size: 15px;
-  margin-bottom: 9px;
-}
-
-.card p {
-  color: #b8c2d1;
-  font-size: 13px;
-  line-height: 1.6;
-}
-
-.membership {
-  border: 1px solid #b99542;
-}
-
-.membership h3 {
-  color: #e9c46a;
-}
-
-.price {
-  font-size: 23px;
-  margin: 12px 0;
-  font-weight: bold;
-}
-
-.form-box {
-  background: #121d30;
-  padding: 25px;
-  border-radius: 14px;
-  max-width: 500px;
-  margin: 25px auto;
-  border: 1px solid #34435b;
-}
-
-input, select, textarea {
-  width: 100%;
-  padding: 13px;
-  margin: 9px 0;
-  background: #080f1d;
-  border: 1px solid #36445c;
-  border-radius: 7px;
-  color: white;
-  outline: none;
-}
-
-textarea {
-  resize: vertical;
-}
-
-.form-box button {
-  width: 100%;
-  margin-top: 12px;
-}
-
-.hidden {
-  display: none !important;
-}
-
-.balance {
-  background: linear-gradient(120deg, #253a36, #142b28);
-  padding: 25px;
-  border-radius: 15px;
-  border: 1px solid #b99542;
-}
-
-.balance h2 {
-  color: #e9c46a;
-  margin-bottom: 12px;
-}
-
-.balance strong {
-  font-size: 30px;
-}
-
-.notice {
-  padding: 14px;
-  border-left: 4px solid #d5aa4c;
-  background: #1a2637;
-  color: #d1d5db;
-  margin: 18px 0;
-  line-height: 1.6;
-}
-
-.actions {
-  display: grid;
-  grid-template-columns: repeat(2, 1fr);
-  gap: 12px;
-  margin-top: 20px;
-}
-
-.actions button {
-  padding: 17px 8px;
-  border-radius: 10px;
-  border: 1px solid #b99542;
-  background: #17243a;
-  color: white;
-  cursor: pointer;
-  font-size: 14px;
-}
-
-.actions button:hover, .card:hover {
-  border-color: #e9c46a;
-}
-
-.post {
-  background: #121d30;
-  padding: 15px;
-  border-radius: 12px;
-  margin-bottom: 15px;
-}
-
-.post img {
-  width: 100%;
-  border-radius: 8px;
-  margin-top: 12px;
-}
-
-footer {
-  background: #111a2b;
-  padding: 30px 15px;
-  text-align: center;
-  color: #aab4c3;
-  margin-top: 40px;
-  line-height: 2;
-}
-
-a {
-  color: #e9c46a;
-  text-decoration: none;
-}
-
-@media(max-width: 500px) {
-  .hero h1 { font-size: 27px; }
-  .money { font-size: 34px; }
-  .actions { grid-template-columns: 1fr 1fr; }
-}
-</style>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="theme-color" content="#080d18">
+  <title>International Giveaway</title>
+  <link rel="stylesheet" href="style.css">
 </head>
-
 <body>
 
-<header>
-  <div class="logo">✦ INTERNATIONAL GIVEAWAY</div>
-  <button onclick="showSection('login')">Login</button>
+<header class="navbar">
+  <a class="logo" href="#">✦ INTERNATIONAL REWARDS</a>
+  <select id="language">
+    <option value="en">English</option>
+    <option value="es">Español</option>
+    <option value="fr">Français</option>
+    <option value="pt">Português</option>
+  </select>
+  <button class="gold-btn" onclick="showPage('login')">Login</button>
 </header>
 
 <section class="hero">
-  <h1>Welcome to International Giveaway</h1>
-  <p>A community rewards demonstration for people around the world.</p>
-  <div class="money">$1,500,000</div>
-  <p>Proposed giveaway pool — not a confirmed available balance.</p>
-  <br>
-  <button onclick="showSection('register')">Join Now</button>
+  <div class="hero-content">
+    <span class="eyebrow">WELCOME TO OUR GLOBAL COMMUNITY</span>
+    <h1>Rewards Without<br>Boundaries.</h1>
+    <p>Discover community giveaways, invitations and rewards.</p>
+    <div class="fund">
+      <small>PROPOSED GIVEAWAY POOL</small>
+      <h2>$1,500,000</h2>
+      <small>Subject to actual funding and verification</small>
+    </div>
+    <button class="gold-btn" onclick="showPage('register')">
+      Create Account →
+    </button>
+  </div>
 </section>
 
-<div class="container">
+<main class="container">
 
-<!-- REGISTRATION -->
+  <!-- REGISTER -->
+  <section id="register" class="panel hidden">
+    <h2>Create Your Account</h2>
+    <p>Join our international community.</p>
+    <form id="registerForm">
+      <label>Full name</label>
+      <input id="fullName" required placeholder="Enter full name">
 
-<section id="register" class="form-box hidden">
-  <h2 class="section-title">Create Your Account</h2>
+      <label>Phone number</label>
+      <input id="phone" type="tel" required placeholder="+234...">
 
-  <form onsubmit="registerUser(event)">
-    <input id="fullName" placeholder="Full Name" required>
-    <input id="phone" type="tel" placeholder="Phone Number" required>
+      <label>Country</label>
+      <select id="country" required>
+        <option value="">Choose country</option>
+        <option>Nigeria</option>
+        <option>United Kingdom</option>
+        <option>United States</option>
+        <option>Ghana</option>
+        <option>Mexico</option>
+        <option>Canada</option>
+        <option>South Africa</option>
+        <option>Other</option>
+      </select>
 
-    <select id="country" required>
-      <option value="">Select Your Country</option>
-      <option>Nigeria</option>
-      <option>United States</option>
-      <option>United Kingdom</option>
-      <option>Mexico</option>
-      <option>Ghana</option>
-      <option>Canada</option>
-      <option>South Africa</option>
-      <option>India</option>
-      <option>Other</option>
-    </select>
+      <label>Password</label>
+      <input id="password" type="password" required minlength="8"
+        placeholder="At least 8 characters">
 
-    <input id="password" type="password"
-      placeholder="Create Password" required minlength="8">
+      <button class="gold-btn full">Register</button>
+    </form>
+    <p class="small">Demonstration form. Real accounts require secure server authentication.</p>
+  </section>
 
-    <p style="font-size:12px;color:#aaa">
-      Demonstration only. Do not enter a real password.
-    </p>
+  <!-- LOGIN -->
+  <section id="login" class="panel hidden">
+    <h2>Member Login</h2>
+    <form id="loginForm">
+      <label>Phone number</label>
+      <input id="loginPhone" type="tel" required>
+      <label>Password</label>
+      <input id="loginPassword" type="password" required>
+      <button class="gold-btn full">Login</button>
+    </form>
+  </section>
 
-    <button class="btn" type="submit">Create Account</button>
-  </form>
-</section>
+  <!-- DASHBOARD -->
+  <section id="dashboard" class="hidden">
+    <div class="welcome">
+      <div>
+        <span class="small">MEMBER DASHBOARD</span>
+        <h2>Welcome, <span id="memberName">Member</span></h2>
+      </div>
+      <button class="outline-btn" onclick="logout()">Logout</button>
+    </div>
 
-<!-- LOGIN -->
+    <div class="balance-card">
+      <span>DEMONSTRATION REWARD BALANCE</span>
+      <h1 id="balance">$0.00</h1>
+      <p>Illustrative balance – no real funds available</p>
+    </div>
 
-<section id="login" class="form-box hidden">
-  <h2 class="section-title">Member Login</h2>
+    <h3 class="section-heading">Your Account</h3>
+    <div class="service-grid">
+      <button onclick="accountAction('Wallet')">👛<span>Wallet</span></button>
+      <button onclick="accountAction('Transfer')">💸<span>Transfer</span></button>
+      <button onclick="accountAction('Withdrawal')">🏦<span>Withdraw</span></button>
+      <button onclick="accountAction('Savings')">🐷<span>Savings</span></button>
+      <button onclick="accountAction('Referrals')">👥<span>Invitations</span></button>
+      <button onclick="accountAction('Rewards')">🎁<span>Rewards</span></button>
+    </div>
 
-  <form onsubmit="loginUser(event)">
-    <input id="loginPhone" type="tel"
-      placeholder="Phone Number" required>
+    <div class="notice">
+      Real withdrawals require verified, available funds and
+      secure payment processing. Never submit gift-card codes
+      to unlock a withdrawal.
+    </div>
 
-    <input id="loginPassword" type="password"
-      placeholder="Password" required>
+    <h3 class="section-heading">My Membership</h3>
+    <div class="panel">
+      <h3 id="currentPlan">No membership selected</h3>
+      <p>Membership details and eligibility will appear here.</p>
+    </div>
 
-    <button class="btn" type="submit">Login</button>
-  </form>
-</section>
+    <h3 class="section-heading">Invite Friends</h3>
+    <div class="panel">
+      <p>Invite friends using your referral link.</p>
+      <p id="referralCount">Verified referrals: 0</p>
+      <button class="gold-btn" onclick="shareInvite()">Share Invitation</button>
+    </div>
+  </section>
 
-<!-- DASHBOARD -->
+  <!-- MEMBERSHIPS -->
+  <h2 class="section-heading">Membership Plans</h2>
+  <div class="plans">
+    <article class="plan">
+      <h3>Normal</h3>
+      <h2>$500</h2>
+      <p>Basic membership information</p>
+      <button onclick="selectPlan('Normal')">View Details</button>
+    </article>
+    <article class="plan">
+      <h3>Gold</h3>
+      <h2>$1,000</h2>
+      <p>Gold membership information</p>
+      <button onclick="selectPlan('Gold')">View Details</button>
+    </article>
+    <article class="plan featured">
+      <span class="tag">POPULAR</span>
+      <h3>Platinum</h3>
+      <h2>$1,750</h2>
+      <p>Platinum membership information</p>
+      <button onclick="selectPlan('Platinum')">View Details</button>
+    </article>
+    <article class="plan">
+      <h3>Exclusive</h3>
+      <h2>$3,550</h2>
+      <p>Exclusive membership information</p>
+      <button onclick="selectPlan('Exclusive')">View Details</button>
+    </article>
+  </div>
+  <p class="small">Prices are proposed examples, not payment requests or promises of returns.</p>
 
-<section id="dashboard" class="hidden">
-
-  <h2 class="section-title">Welcome, <span id="memberName"></span>!</h2>
-
-  <div class="balance">
-    <h2>My Rewards Dashboard</h2>
-    <p>Demonstration reward balance</p>
-    <strong id="rewardBalance">$0.00</strong>
-    <p style="font-size:12px;margin-top:10px">
-      No real funds are held in this demonstration.
-    </p>
+  <!-- SERVICES -->
+  <h2 class="section-heading">Services & Utilities</h2>
+  <div class="service-grid">
+    <div>📱<span>Airtime</span></div>
+    <div>🌐<span>Internet Data</span></div>
+    <div>🎮<span>Betting</span></div>
+    <div>📺<span>TV Subscription</span></div>
+    <div>💡<span>Electricity</span></div>
+    <div>🏦<span>Banking</span></div>
   </div>
 
-  <div class="actions">
-    <button onclick="demoAction('Wallet')">👛 Wallet</button>
-    <button onclick="demoAction('Transfer')">💸 Transfer</button>
-    <button onclick="demoAction('Withdrawal')">🏦 Withdraw</button>
-    <button onclick="demoAction('Savings')">🐷 Savings</button>
-    <button onclick="demoAction('Referral')">👥 Invite Friends</button>
-    <button onclick="demoAction('Rewards')">🎁 My Rewards</button>
+  <!-- CURRENCY -->
+  <h2 class="section-heading">Currency Preference</h2>
+  <select id="currency" class="currency-select">
+    <option value="USD">USD – US Dollar</option>
+    <option value="NGN">NGN – Nigerian Naira</option>
+    <option value="GBP">GBP – British Pound</option>
+    <option value="EUR">EUR – Euro</option>
+    <option value="MXN">MXN – Mexican Peso</option>
+    <option value="GHS">GHS – Ghana Cedi</option>
+    <option value="KES">KES – Kenyan Shilling</option>
+  </select>
+  <p id="currencyStatus" class="small">Choose your preferred display currency.</p>
+
+  <!-- ANNOUNCEMENTS -->
+  <h2 class="section-heading">Latest Updates</h2>
+  <div id="posts">
+    <article class="post">
+      <h3>Welcome to International Rewards</h3>
+      <p>Follow our official announcements for community updates.</p>
+    </article>
   </div>
 
-  <div class="notice">
-    Withdrawal requests are demonstrations only. Real withdrawals
-    require verified funds, secure payment processing and
-    independently confirmed eligibility.
-  </div>
+  <!-- ADMIN PREVIEW -->
+  <section class="panel admin-preview">
+    <h2>Admin Content Preview</h2>
+    <p class="small">This preview is not a secure administrator login.</p>
+    <input id="postTitle" placeholder="Announcement title">
+    <textarea id="postContent" placeholder="Write your announcement"></textarea>
+    <input id="postImage" type="file" accept="image/*">
+    <button class="gold-btn full" onclick="publishPost()">Preview Post</button>
+  </section>
 
-  <h2 class="section-title">My Membership</h2>
-  <div class="card">
-    <h3 id="memberPlan">No membership selected</h3>
-    <p>View your membership information below.</p>
-  </div>
-
-  <br>
-  <button class="btn" onclick="logout()">Logout</button>
-
-</section>
-
-<!-- MEMBERSHIPS -->
-
-<h2 class="section-title">Membership Options</h2>
-
-<div class="grid">
-
-  <div class="card membership">
-    <h3>Normal</h3>
-    <div class="price">$500</div>
-    <p>Basic membership information.</p>
-    <button class="btn" onclick="choosePlan('Normal','$500')">View Plan</button>
-  </div>
-
-  <div class="card membership">
-    <h3>Gold</h3>
-    <div class="price">$1,000</div>
-    <p>Gold membership information.</p>
-    <button class="btn" onclick="choosePlan('Gold','$1,000')">View Plan</button>
-  </div>
-
-  <div class="card membership">
-    <h3>Platinum</h3>
-    <div class="price">$1,750</div>
-    <p>Platinum membership information.</p>
-    <button class="btn" onclick="choosePlan('Platinum','$1,750')">View Plan</button>
-  </div>
-
-  <div class="card membership">
-    <h3>Exclusive</h3>
-    <div class="price">$3,550</div>
-    <p>Exclusive membership information.</p>
-    <button class="btn" onclick="choosePlan('Exclusive','$3,550')">View Plan</button>
-  </div>
-
-</div>
-
-<div class="notice">
-  Membership prices are proposed examples, not payment requests.
-  Membership does not guarantee a cash reward or financial return.
-</div>
-
-<!-- FINANCIAL SERVICES -->
-
-<h2 class="section-title">Financial Services & Utilities</h2>
-
-<div class="grid">
-
-  <div class="card">
-    <div class="icon">📱</div>
-    <h3>Airtime</h3>
-    <p>Mobile recharge services.</p>
-  </div>
-
-  <div class="card">
-    <div class="icon">🌐</div>
-    <h3>Data</h3>
-    <p>Internet data bundles.</p>
-  </div>
-
-  <div class="card">
-    <div class="icon">🎮</div>
-    <h3>Betting</h3>
-    <p>Gaming wallet services.</p>
-  </div>
-
-  <div class="card">
-    <div class="icon">📺</div>
-    <h3>TV Subscription</h3>
-    <p>DStv, GOtv and Startimes.</p>
-  </div>
-
-  <div class="card">
-    <div class="icon">💡</div>
-    <h3>Electricity</h3>
-    <p>Electricity bill services.</p>
-  </div>
-
-  <div class="card">
-    <div class="icon">🏦</div>
-    <h3>Banking</h3>
-    <p>Secure banking integrations.</p>
-  </div>
-
-</div>
-
-<!-- CURRENCY -->
-
-<h2 class="section-title">Choose Your Currency</h2>
-
-<select id="currency" onchange="changeCurrency()">
-  <option value="USD">$ USD - US Dollar</option>
-  <option value="NGN">₦ NGN - Nigerian Naira</option>
-  <option value="GBP">£ GBP - British Pound</option>
-  <option value="EUR">€ EUR - Euro</option>
-  <option value="MXN">$ MXN - Mexican Peso</option>
-  <option value="GHS">₵ GHS - Ghana Cedi</option>
-  <option value="KES">KSh KES - Kenyan Shilling</option>
-</select>
-
-<p id="currencyMessage" style="color:#aaa;font-size:13px">
-  Currency display selection. Live conversion requires an exchange-rate service.
-</p>
-
-<!-- ANNOUNCEMENTS -->
-
-<h2 class="section-title">Latest Announcements</h2>
-
-<div id="posts">
-  <div class="post">
-    <h3 style="color:#e9c46a">Welcome to our community!</h3>
-    <p>Stay updated with official giveaway announcements and verified rewards.</p>
-  </div>
-</div>
-
-<!-- ADMIN DEMONSTRATION -->
-
-<section class="form-box">
-  <h2 class="section-title">Admin Preview</h2>
-  <p style="color:#aaa;font-size:13px">
-    Local demonstration only. A real admin area must use
-    server-side administrator authentication.
-  </p>
-
-  <input id="adminTitle" placeholder="Announcement title">
-  <textarea id="adminText" placeholder="Write announcement"></textarea>
-  <input id="adminImage" type="file" accept="image/*">
-
-  <button class="btn" onclick="publishPost()">Preview Announcement</button>
-</section>
-
-</div>
+</main>
 
 <footer>
-  <h3 style="color:#e9c46a">INTERNATIONAL GIVEAWAY</h3>
-  <p>International community rewards demonstration.</p>
-  <p>WhatsApp Support:
-    <a href="https://wa.me/2349040071415">
-      +2349040071415
-    </a>
-  </p>
+  <h3>INTERNATIONAL REWARDS</h3>
+  <p>Community giveaways and rewards.</p>
+  <p>WhatsApp: <a href="https://wa.me/2349040071415">+2349040071415</a></p>
   <p>Email: okoyechamaka@gmail.com</p>
-  <p>© 2026 International Giveaway</p>
+  <p>© 2026 International Rewards</p>
 </footer>
 
-<script>
-
-// DEMONSTRATION ACCOUNT
-let currentUser = null;
-
-function showSection(id) {
-  document.querySelectorAll('#register,#login')
-    .forEach(el => el.classList.add('hidden'));
-
-  document.getElementById(id).classList.remove('hidden');
-
-  document.getElementById(id).scrollIntoView({
-    behavior: 'smooth'
-  });
-}
-
-// REGISTRATION
-function registerUser(event) {
-  event.preventDefault();
-
-  const name = document.getElementById('fullName').value;
-  const phone = document.getElementById('phone').value;
-  const country = document.getElementById('country').value;
-
-  currentUser = {
-    name,
-    phone,
-    country,
-    plan: 'No membership selected'
-  };
-
-  openDashboard();
-
-  alert('Demonstration account created successfully!');
-}
-
-// LOGIN
-function loginUser(event) {
-  event.preventDefault();
-
-  alert(
-    'This is a frontend demonstration. ' +
-    'Connect a secure authentication backend before using real accounts.'
-  );
-}
-
-// DASHBOARD
-function openDashboard() {
-  document.getElementById('dashboard').classList.remove('hidden');
-
-  document.getElementById('memberName').textContent =
-    currentUser.name;
-
-  document.getElementById('memberPlan').textContent =
-    currentUser.plan;
-
-  document.getElementById('dashboard').scrollIntoView({
-    behavior: 'smooth'
-  });
-}
-
-// LOGOUT
-function logout() {
-  currentUser = null;
-  document.getElementById('dashboard').classList.add('hidden');
-  alert('You have logged out.');
-}
-
-// MEMBERSHIP
-function choosePlan(name, price) {
-  alert(
-    name + ' Membership: ' + price +
-    '\nThis is a proposed plan. No payment has been taken.'
-  );
-
-  if (currentUser) {
-    currentUser.plan = name + ' Membership';
-    document.getElementById('memberPlan').textContent =
-      currentUser.plan;
-  }
-}
-
-// DASHBOARD ACTIONS
-function demoAction(action) {
-  alert(
-    action + ' section selected.\n' +
-    'Real financial operations are not enabled in this demo.'
-  );
-}
-
-// CURRENCY DISPLAY
-function changeCurrency() {
-  const currency =
-    document.getElementById('currency').value;
-
-  document.getElementById('currencyMessage').textContent =
-    'Selected currency: ' + currency +
-    '. Live conversion is not enabled yet.';
-}
-
-// ADMIN POST PREVIEW
-function publishPost() {
-  const title =
-    document.getElementById('adminTitle').value;
-
-  const content =
-    document.getElementById('adminText').value;
-
-  const file =
-    document.getElementById('adminImage').files[0];
-
-  if (!title || !content) {
-    alert('Please enter a title and announcement.');
-    return;
-  }
-
-  const post = document.createElement('div');
-  post.className = 'post';
-
-  const heading = document.createElement('h3');
-  heading.style.color = '#e9c46a';
-  heading.textContent = title;
-
-  const paragraph = document.createElement('p');
-  paragraph.textContent = content;
-
-  post.appendChild(heading);
-  post.appendChild(paragraph);
-
-  if (file) {
-    const image = document.createElement('img');
-    image.src = URL.createObjectURL(file);
-    image.alt = 'Announcement picture';
-    post.appendChild(image);
-  }
-
-  document.getElementById('posts').prepend(post);
-
-  alert('Announcement preview published on this page.');
-}
-
-</script>
-
+<script src="script.js"></script>
 </body>
 </html>
