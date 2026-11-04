@@ -1,6 +1,7 @@
 
 :root {
   --gold: #e5bd65;
+  --gold-dark: #bd903c;
   --dark: #080d18;
   --panel: #121d30;
   --muted: #aeb9ca;
@@ -12,6 +13,10 @@
   padding: 0;
   box-sizing: border-box;
   font-family: Arial, sans-serif;
+}
+
+html {
+  scroll-behavior: smooth;
 }
 
 body {
@@ -33,6 +38,9 @@ button, select {
   gap: 12px;
   background: #111a2b;
   border-bottom: 1px solid var(--gold);
+  position: sticky;
+  top: 0;
+  z-index: 20;
 }
 
 .logo {
@@ -42,24 +50,45 @@ button, select {
   text-decoration: none;
 }
 
-.navbar select {
+.nav-actions {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.nav-actions select {
   max-width: 110px;
 }
 
+.gold-btn {
+  background: linear-gradient(120deg, #f1d18a, #c29437);
+  color: #151515;
+  border: none;
+  padding: 13px 22px;
+  border-radius: 8px;
+  font-weight: bold;
+  transition: .2s;
+}
+
+.gold-btn:hover {
+  transform: translateY(-2px);
+  filter: brightness(1.1);
+}
+
 .hero {
-  min-height: 420px;
-  padding: 65px 20px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  text-align: center;
+  min-height: 470px;
   background:
     linear-gradient(120deg, #101a2bdf, #172b3aeb),
     url("https://images.unsplash.com/photo-1579621970563-ebec7560ff3e?w=1400")
     center/cover;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  padding: 60px 20px;
 }
 
-.hero-content {
+.hero-overlay {
   max-width: 650px;
 }
 
@@ -70,9 +99,9 @@ button, select {
 }
 
 .hero h1 {
-  font-size: clamp(35px, 6vw, 58px);
+  font-size: clamp(36px, 6vw, 58px);
   line-height: 1.15;
-  margin: 15px 0;
+  margin: 18px 0;
 }
 
 .hero p {
@@ -81,7 +110,7 @@ button, select {
 
 .fund {
   margin: 25px auto;
-  padding: 18px;
+  padding: 20px;
   max-width: 350px;
   background: #080d18bb;
   border: 1px solid var(--gold);
@@ -93,25 +122,9 @@ button, select {
 }
 
 .fund h2 {
-  font-size: 38px;
+  font-size: 40px;
   color: var(--gold);
-  margin: 7px 0;
-}
-
-.gold-btn {
-  background: linear-gradient(120deg, #f1d18a, #c29437);
-  color: #151515;
-  border: none;
-  padding: 13px 22px;
-  border-radius: 8px;
-  font-weight: bold;
-  cursor: pointer;
-  transition: .2s;
-}
-
-.gold-btn:hover {
-  transform: translateY(-2px);
-  filter: brightness(1.1);
+  margin: 8px 0;
 }
 
 .container {
@@ -135,7 +148,7 @@ button, select {
 
 .panel label {
   display: block;
-  margin-top: 12px;
+  margin-top: 13px;
   color: #d5dce8;
 }
 
@@ -154,9 +167,22 @@ input:focus, select:focus, textarea:focus {
   outline: none;
 }
 
+input[type="checkbox"] {
+  width: auto;
+  margin-right: 8px;
+  accent-color: var(--gold);
+}
+
 textarea {
-  min-height: 110px;
+  min-height: 100px;
   resize: vertical;
+}
+
+.check-row {
+  display: flex !important;
+  align-items: center;
+  gap: 5px;
+  font-size: 13px;
 }
 
 .full {
@@ -172,6 +198,12 @@ textarea {
 
 .hidden {
   display: none !important;
+}
+
+.honeypot {
+  position: absolute;
+  left: -9999px;
+  opacity: 0;
 }
 
 .section-heading {
@@ -312,10 +344,6 @@ textarea {
   margin-bottom: 10px;
 }
 
-.currency-select {
-  max-width: 350px;
-}
-
 .post h3 {
   color: var(--gold);
   margin-bottom: 8px;
@@ -326,6 +354,53 @@ textarea {
   width: 100%;
   border-radius: 9px;
   margin-top: 15px;
+  max-height: 350px;
+  object-fit: cover;
+}
+
+.currency-select {
+  max-width: 350px;
+}
+
+.privacy-banner {
+  position: fixed;
+  bottom: 15px;
+  left: 15px;
+  right: 15px;
+  z-index: 50;
+  background: #182438;
+  border: 1px solid var(--gold);
+  border-radius: 12px;
+  padding: 16px;
+  box-shadow: 0 8px 30px #0008;
+}
+
+.privacy-banner p {
+  font-size: 13px;
+  margin-bottom: 12px;
+}
+
+.privacy-banner div {
+  display: flex;
+  gap: 10px;
+}
+
+.whatsapp {
+  position: fixed;
+  right: 18px;
+  bottom: 20px;
+  z-index: 30;
+  padding: 12px 17px;
+  border-radius: 30px;
+  background: #128c52;
+  color: white;
+  text-decoration: none;
+  box-shadow: 0 4px 15px #0008;
+  font-weight: bold;
+}
+
+.whatsapp span {
+  font-size: 18px;
 }
 
 footer {
@@ -368,5 +443,9 @@ footer a {
 
   .balance-card h1 {
     font-size: 30px;
+  }
+
+  .panel {
+    padding: 17px;
   }
 }
