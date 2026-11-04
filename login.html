@@ -1,0 +1,110 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="theme-color" content="#080d18">
+
+  <title>Member Login | International Rewards</title>
+
+  <link rel="stylesheet" href="login.css">
+</head>
+
+<body>
+
+<div class="login-container">
+
+  <div class="brand">
+    <div class="brand-icon">✦</div>
+    <h2>INTERNATIONAL REWARDS</h2>
+    <p>Welcome back to our global community</p>
+  </div>
+
+  <div class="login-card">
+
+    <div class="welcome-icon">👤</div>
+
+    <h1>Member Login</h1>
+    <p class="subtitle">Sign in to access your account</p>
+
+    <form id="loginForm">
+
+      <label>Phone Number</label>
+
+      <div class="input-box">
+        <span>📱</span>
+        <input
+          type="tel"
+          id="phone"
+          placeholder="+234 000 000 0000"
+          autocomplete="tel"
+          required>
+      </div>
+
+      <label>Password</label>
+
+      <div class="input-box">
+        <span>🔒</span>
+        <input
+          type="password"
+          id="password"
+          placeholder="Enter your password"
+          autocomplete="current-password"
+          required>
+        <button type="button" id="togglePassword"
+          class="eye-button">Show</button>
+      </div>
+
+      <div class="login-options">
+        <label class="remember">
+          <input type="checkbox" id="remember">
+          Remember me
+        </label>
+
+        <a href="#" id="forgotPassword">Forgot password?</a>
+      </div>
+
+      <button type="submit" class="login-button">
+        Sign In →
+      </button>
+
+    </form>
+
+    <div id="message" class="message" aria-live="polite"></div>
+
+    <div class="separator">
+      <span>NEW MEMBER?</span>
+    </div>
+
+    <a href="index.html#register" class="register-button">
+      Create New Account
+    </a>
+
+  </div>
+
+  <div class="security-note">
+    <span>🔐</span>
+    <p>Your account security matters. Never share your password
+      or withdrawal PIN with anyone.</p>
+  </div>
+
+  <div class="support">
+    Need assistance?
+    <a href="https://wa.me/2349040071415">
+      Contact WhatsApp Support
+    </a>
+  </div>
+
+  <footer>
+    © 2026 International Rewards
+    <br>
+    Community rewards demonstration
+  </footer>
+
+</div>
+
+<script src="login.js"></script>
+
+</body>
+</html>
