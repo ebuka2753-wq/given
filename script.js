@@ -1,174 +1,113 @@
 
-/*
-  INTERNATIONAL REWARDS
-  Login and dashboard demonstration.
+// INTERNATIONAL REWARDS
+// Membership page JavaScript
 
-  NOTE:
-  This is a browser-only demo login.
-  It does not verify phone ownership or create secure accounts.
-  Supabase authentication will be connected separately.
-*/
-
-const loginForm = document.getElementById("loginForm");
-const loginView = document.getElementById("loginView");
-const dashboardView = document.getElementById("dashboardView");
-const loginError = document.getElementById("loginError");
-
-const fullNameInput = document.getElementById("fullName");
-const phoneInput = document.getElementById("phone");
-const genderInput = document.getElementById("gender");
-
-const memberName = document.getElementById("memberName");
-const profileName = document.getElementById("profileName");
-const profilePhone = document.getElementById("profilePhone");
-const profileGender = document.getElementById("profileGender");
-
-const logoutButton = document.getElementById("logoutButton");
-const currencySelect = document.getElementById("currencySelect");
-const poolAmount = document.getElementById("poolAmount");
-const rateNote = document.getElementById("rateNote");
-
-const PROGRAMME_POOL_USD = 1500000;
-
-// Illustrative rates only. These are not live exchange rates.
-const exchangeRates = {
-  USD: 1,
-  NGN: 1450,
-  GBP: 0.78,
-  EUR: 0.92,
-  MXN: 17.1,
-  GHS: 15.2,
-  KES: 129,
-  CAD: 1.37,
-  AUD: 1.52,
-  INR: 83.5,
-  ZAR: 18.6
+const membershipPrices = {
+  "Normal Community": 500,
+  "Gold Membership": 1000,
+  "Platinum Membership": 1750,
+  "Exclusive Membership": 3550
 };
 
-// Update the programme pool display.
-function updateCurrency() {
-  const currency = currencySelect.value;
-  const rate = exchangeRates[currency];
+// Get page elements
+const membership = document.getElementById("membership");
+const price = document.getElementById("price");
+const receipt = document.getElementById("receipt");
+const preview = document.getElementById("preview");
+const receiptImage = document.getElementById("receiptImage");
+const membershipForm = document.getElementById("membershipForm");
 
-  if (!rate) return;
+// WhatsApp support number
+const whatsappNumber = "2349040071415";
 
-  const convertedAmount = PROGRAMME_POOL_USD * rate;
+// Display membership price
+if (membership) {
+  membership.addEventListener("change", function () {
+    const selected = membership.value;
 
-  try {
-    poolAmount.textContent = new Intl.NumberFormat(
-      undefined,
-      {
-        style: "currency",
-        currency: currency,
-        maximumFractionDigits: 0
-      }
-    ).format(convertedAmount);
-  } catch (error) {
-    poolAmount.textContent =
-      currency + " " + Math.round(convertedAmount).toLocaleString();
-  }
-
-  rateNote.textContent =
-    `Illustrative rate: 1 USD ≈ ${rate} ${currency}. Not a live exchange quote.`;
-}
-
-// Display the member dashboard.
-function openDashboard(member) {
-  loginView.classList.add("hidden");
-  dashboardView.classList.remove("hidden");
-
-  memberName.textContent =
-    member.fullName.split(/\s+/)[0];
-
-  profileName.textContent = member.fullName;
-  profilePhone.textContent = member.phone;
-  profileGender.textContent = member.gender;
-
-  currencySelect.value = member.currency || "USD";
-
-  updateCurrency();
-
-  window.scrollTo({
-    top: 0,
-    behavior: "smooth"
+    price.textContent = selected
+      ? "$" + membershipPrices[selected].toLocaleString("en-US")
+      : "$0";
   });
 }
 
-// Handle login.
-loginForm.addEventListener("submit", function(event) {
-  event.preventDefault();
+// Preview uploaded receipt
+if (receipt) {
+  receipt.addEventListener("change", function () {
+    const file = this.files[0];
 
-  loginError.textContent = "";
+    if (!file) {
+      preview.style.display = "none";
+      return;
+    }
 
-  const fullName = fullNameInput.value.trim().replace(/\s+/g, " ");
-  const phone = phoneInput.value.trim();
-  const gender = genderInput.value;
+    if (!["image/jpeg", "image/png", "image/webp"].includes(file.type)) {
+      alert("Please upload a JPG, PNG or WEBP image.");
+      this.value = "";
+      preview.style.display = "none";
+      return;
+    }
 
-  if (fullName.length < 2) {
-    loginError.textContent = "Please enter your full name.";
-    return;
-  }
+    if (file.size > 5 * 1024 * 1024) {
+      alert("Your image must be smaller than 5MB.");
+      this.value = "";
+      preview.style.display = "none";
+      return;
+    }
 
-  const validPhone = /^[+()\d\s.-]{7,24}$/;
+    const reader = new FileReader();
 
-  if (!validPhone.test(phone)) {
-    loginError.textContent = "Please enter a valid phone number.";
-    return;
-  }
+    reader.onload = function (event) {
+      receiptImage.src = event.target.result;
+      preview.style.display = "block";
+    };
 
-  if (!gender) {
-    loginError.textContent = "Please select your gender.";
-    return;
-  }
-
-  const member = {
-    fullName: fullName,
-    phone: phone,
-    gender: gender,
-    currency: "USD"
-  };
-
-  // Keep the demo session only in this browser tab.
-  sessionStorage.setItem(
-    "ir_demo_member",
-    JSON.stringify(member)
-  );
-
-  openDashboard(member);
-});
-
-// Change currency.
-currencySelect.addEventListener("change", function() {
-  updateCurrency();
-});
-
-// Sign out.
-logoutButton.addEventListener("click", function() {
-  sessionStorage.removeItem("ir_demo_member");
-
-  dashboardView.classList.add("hidden");
-  loginView.classList.remove("hidden");
-
-  loginForm.reset();
-  loginError.textContent = "";
-
-  window.scrollTo({
-    top: 0,
-    behavior: "smooth"
+    reader.readAsDataURL(file);
   });
-});
+}
 
-// Show current year.
-document.getElementById("year").textContent =
-  new Date().getFullYear();
+// Submit membership request to WhatsApp
+if (membershipForm) {
+  membershipForm.addEventListener("submit", function (event) {
+    event.preventDefault();
 
-// Restore demo session when the page is refreshed in this tab.
-try {
-  const savedMember = sessionStorage.getItem("ir_demo_member");
+    const name = document.getElementById("fullName").value.trim();
+    const plan = membership.value;
+    const method = document.getElementById("payment").value;
+    const amount = document.getElementById("amount").value;
+    const uploadedFile = receipt.files[0];
 
-  if (savedMember) {
-    openDashboard(JSON.parse(savedMember));
-  }
-} catch (error) {
-  sessionStorage.removeItem("ir_demo_member");
+    if (!name || !plan || !method || !amount || !uploadedFile) {
+      alert("Please complete all fields.");
+      return;
+    }
+
+    if (!membershipPrices[plan]) {
+      alert("Please select a valid membership.");
+      return;
+    }
+
+    if (Number(amount) <= 0) {
+      alert("Please enter a valid payment amount.");
+      return;
+    }
+
+    const message =
+      "Hello International Rewards Support.\n\n" +
+      "I would like to submit my membership payment for review.\n\n" +
+      "Full name: " + name + "\n" +
+      "Membership: " + plan + "\n" +
+      "Listed price: $" + membershipPrices[plan].toLocaleString("en-US") + "\n" +
+      "Payment method: " + method + "\n" +
+      "Amount paid: $" + Number(amount).toLocaleString("en-US") + "\n\n" +
+      "I will attach my payment receipt manually for review.";
+
+    const whatsappURL =
+      "https://wa.me/" +
+      whatsappNumber +
+      "?text=" +
+      encodeURIComponent(message);
+
+    window.open(whatsappURL, "_blank");
+  });
 }
