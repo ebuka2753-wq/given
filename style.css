@@ -1,265 +1,479 @@
 
-@import url('https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700;800&family=Playfair+Display:wght@500;600;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700;800&family=Playfair+Display:wght@600;700&display=swap');
+
+/* =========================
+   GLOBAL SETTINGS
+========================= */
 
 :root {
-  --gold: #d8ad55;
-  --gold-light: #f4d58b;
-  --dark: #090909;
+  --gold: #e4c477;
+  --gold-light: #f1d58e;
+  --gold-dark: #bd8730;
+
+  --background: #090909;
   --panel: #151515;
-  --text: #f5f0e5;
+  --panel-light: #1c1c1c;
+
+  --text: #f6f0e5;
   --muted: #aaa49a;
-  --border: rgba(216, 173, 85, 0.3);
+
+  --border: rgba(228, 196, 119, 0.28);
 }
 
 * {
+  box-sizing: border-box;
   margin: 0;
   padding: 0;
-  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
 }
 
 body {
   min-height: 100vh;
-  padding: 25px 16px;
   background:
-    radial-gradient(circle at top right, #30230e, transparent 35%),
-    linear-gradient(135deg, #080808, #12100c);
+    radial-gradient(
+      circle at top right,
+      #30230e 0,
+      transparent 34%
+    ),
+    var(--background);
+
   color: var(--text);
   font-family: 'DM Sans', sans-serif;
   line-height: 1.6;
 }
 
-.container {
-  width: 100%;
-  max-width: 620px;
-  margin: 25px auto;
-  padding: 35px;
-  background: linear-gradient(145deg, #1b1b1b, #101010);
-  border: 1px solid var(--border);
-  border-radius: 20px;
-  box-shadow: 0 20px 60px rgba(0, 0, 0, 0.55);
+
+/* =========================
+   HEADER
+========================= */
+
+header {
+  padding: 20px 5%;
+
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+
+  border-bottom: 1px solid var(--border);
+
+  background: rgba(11, 11, 11, 0.95);
+
+  position: sticky;
+  top: 0;
+  z-index: 100;
+  backdrop-filter: blur(12px);
 }
 
-/* BRAND */
-
-.logo {
-  text-align: center;
-  color: var(--gold-light);
+header b {
   font-family: 'Playfair Display', serif;
-  font-size: 27px;
+  font-size: 22px;
   font-weight: 700;
+  color: var(--gold);
   letter-spacing: 1px;
-  margin-bottom: 30px;
 }
 
-/* HEADINGS */
+header span {
+  color: var(--muted);
+  font-size: 13px;
+}
+
+
+/* =========================
+   MAIN LAYOUT
+========================= */
+
+main {
+  width: min(1000px, 92%);
+  margin: 32px auto;
+}
+
+.panel {
+  background: linear-gradient(
+    145deg,
+    #1a1a1a,
+    #101010
+  );
+
+  border: 1px solid var(--border);
+  border-radius: 17px;
+
+  padding: 26px;
+  margin: 18px 0;
+
+  box-shadow: 0 15px 40px #0005;
+}
+
+#loginView,
+#pinSetupView {
+  max-width: 520px;
+  margin: 45px auto;
+}
+
+
+/* =========================
+   HEADINGS AND TEXT
+========================= */
+
+h1,
+h2 {
+  font-family: 'Playfair Display', serif;
+  color: var(--gold);
+  margin-bottom: 12px;
+}
+
+h1 {
+  font-size: 30px;
+}
 
 h2 {
-  color: var(--gold-light);
-  font-family: 'Playfair Display', serif;
-  font-size: 29px;
+  font-size: 24px;
+}
+
+p {
+  color: var(--muted);
   margin-bottom: 10px;
 }
 
-.intro {
-  color: var(--muted);
-  font-size: 14px;
-  line-height: 1.8;
-  margin-bottom: 28px;
+small {
+  color: #c6bda9;
+  font-size: 12px;
 }
 
-/* FORM */
+.hidden {
+  display: none !important;
+}
+
+
+/* =========================
+   FORMS
+========================= */
 
 label {
   display: block;
-  margin: 19px 0 8px;
-  color: var(--gold-light);
+
+  margin: 16px 0 7px;
+
+  color: var(--gold);
+
   font-size: 13px;
   font-weight: 700;
 }
 
 input,
 select {
-  display: block;
   width: 100%;
-  padding: 15px;
-  background: #090909;
-  border: 1px solid #48402f;
-  border-radius: 10px;
+
+  padding: 14px;
+
+  background: #080808;
   color: white;
-  font-size: 14px;
+
+  border: 1px solid #51452e;
+  border-radius: 9px;
+
   outline: none;
-  transition: 0.25s ease;
+
+  font-family: inherit;
+  font-size: 15px;
+
+  transition: 0.25s;
 }
 
 input:focus,
 select:focus {
   border-color: var(--gold);
-  box-shadow: 0 0 0 3px rgba(216, 173, 85, 0.1);
+
+  box-shadow: 0 0 0 3px
+    rgba(228, 196, 119, 0.12);
 }
 
 input::placeholder {
   color: #777;
 }
 
-input[type="file"] {
-  padding: 12px;
-  cursor: pointer;
-  color: #c9bda4;
+select option {
+  background: #111;
+  color: white;
 }
 
-input[type="file"]::file-selector-button {
-  padding: 10px 14px;
-  margin-right: 12px;
-  border: none;
-  border-radius: 7px;
-  background: linear-gradient(135deg, #f4d58b, #bd8730);
-  color: #171006;
-  font-weight: 700;
-  cursor: pointer;
-}
 
-/* MEMBERSHIP PRICE */
-
-.price {
-  padding: 22px;
-  margin-top: 20px;
-  background:
-    radial-gradient(circle at top right, #463419, transparent 60%),
-    #1c170f;
-  border: 1px solid rgba(216, 173, 85, 0.45);
-  border-radius: 13px;
-}
-
-.price p {
-  color: #c7b99c;
-  font-size: 13px;
-  margin-bottom: 5px;
-}
-
-.price strong {
-  display: block;
-  color: var(--gold-light);
-  font-size: 31px;
-  font-weight: 800;
-}
-
-/* IMAGE PREVIEW */
-
-.preview {
-  display: none;
-  margin-top: 20px;
-  padding: 15px;
-  border: 1px solid var(--border);
-  border-radius: 12px;
-  background: #0b0b0b;
-}
-
-.preview img {
-  display: block;
-  width: 100%;
-  max-height: 300px;
-  object-fit: contain;
-  margin-top: 10px;
-  border-radius: 8px;
-}
-
-/* SECURITY NOTICE */
-
-.notice {
-  margin-top: 25px;
-  padding: 18px;
-  background: rgba(216, 173, 85, 0.07);
-  border: 1px solid var(--border);
-  border-radius: 12px;
-  color: #d5c8aa;
-  font-size: 13px;
-  line-height: 1.8;
-}
-
-.notice strong {
-  display: block;
-  color: var(--gold-light);
-  margin-bottom: 5px;
-}
-
-/* SUBMIT BUTTON */
+/* =========================
+   BUTTONS
+========================= */
 
 button {
-  display: block;
-  width: 100%;
-  padding: 16px;
-  margin-top: 25px;
   border: none;
-  border-radius: 10px;
-  background: linear-gradient(135deg, #f4d58b, #bd8730);
+  border-radius: 9px;
+
+  padding: 14px 18px;
+
+  background: linear-gradient(
+    135deg,
+    var(--gold-light),
+    var(--gold-dark)
+  );
+
   color: #171006;
-  font-size: 15px;
+
+  font-family: inherit;
+  font-size: 14px;
   font-weight: 800;
+
   cursor: pointer;
-  transition: 0.25s ease;
+
+  transition: 0.25s;
 }
 
 button:hover {
+  filter: brightness(1.12);
   transform: translateY(-2px);
-  box-shadow: 0 8px 25px rgba(216, 173, 85, 0.2);
 }
 
 button:active {
   transform: scale(0.98);
 }
 
-/* SMALL TEXT */
-
-.small {
-  color: #999;
-  font-size: 12px;
-  line-height: 1.7;
-  margin-top: 12px;
+form button {
+  width: 100%;
+  margin-top: 22px;
 }
 
-/* FOOTER */
+.secondary {
+  background: transparent;
+  color: var(--gold);
+  border: 1px solid var(--border);
+}
+
+
+/* =========================
+   SECURITY NOTICE
+========================= */
+
+.notice {
+  font-size: 12px;
+
+  color: #d2c4a5;
+
+  background: #292112;
+
+  border: 1px solid var(--border);
+  border-radius: 9px;
+
+  padding: 13px;
+  margin-top: 18px;
+}
+
+
+/* =========================
+   DASHBOARD WELCOME
+========================= */
+
+.welcome {
+  display: flex;
+
+  justify-content: space-between;
+  align-items: center;
+
+  gap: 15px;
+  margin-bottom: 20px;
+}
+
+
+/* =========================
+   PROGRAMME PRIZE POOL
+========================= */
+
+.pool {
+  background: linear-gradient(
+    120deg,
+    #2b2111,
+    #111
+  );
+
+  border: 1px solid var(--border);
+}
+
+.pool h2 {
+  font-family: 'DM Sans', sans-serif;
+
+  font-size: clamp(34px, 7vw, 52px);
+
+  font-weight: 800;
+
+  color: #ffebbb;
+
+  margin: 6px 0;
+}
+
+
+/* =========================
+   DASHBOARD ICON GRID
+========================= */
+
+.tiles {
+  display: grid;
+
+  grid-template-columns: repeat(3, 1fr);
+
+  gap: 14px;
+
+  margin: 22px 0;
+}
+
+.tiles button {
+  min-height: 110px;
+
+  display: flex;
+  flex-direction: column;
+
+  align-items: center;
+  justify-content: center;
+
+  gap: 8px;
+
+  background: #191919;
+
+  border: 1px solid var(--border);
+
+  color: var(--gold);
+
+  font-size: 27px;
+}
+
+.tiles button span {
+  font-size: 15px;
+  color: #f5f0e5;
+}
+
+.tiles button:hover {
+  background: #292012;
+  border-color: var(--gold);
+}
+
+
+/* =========================
+   DASHBOARD CONTENT
+========================= */
+
+.subview {
+  animation: fadeIn 0.3s ease;
+}
+
+.subview p {
+  color: #c8c0b2;
+  line-height: 1.8;
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(8px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+
+/* =========================
+   FOOTER
+========================= */
 
 footer {
-  margin-top: 30px;
-  padding-top: 20px;
-  border-top: 1px solid var(--border);
   text-align: center;
+
   color: #777;
+
+  border-top: 1px solid var(--border);
+
+  padding: 24px;
+
   font-size: 12px;
 }
 
-/* MOBILE DESIGN */
+
+/* =========================
+   MOBILE RESPONSIVENESS
+========================= */
 
 @media (max-width: 600px) {
-  body {
-    padding: 12px;
+
+  header {
+    padding: 16px 4%;
+    gap: 10px;
   }
 
-  .container {
-    padding: 25px 19px;
-    margin: 12px auto;
-    border-radius: 15px;
+  header b {
+    font-size: 18px;
   }
 
-  .logo {
-    font-size: 23px;
+  header span {
+    font-size: 11px;
   }
 
-  h2 {
-    font-size: 25px;
+  main {
+    width: 92%;
+    margin: 20px auto;
   }
 
-  .price strong {
-    font-size: 27px;
+  .panel {
+    padding: 20px;
+  }
+
+  #loginView,
+  #pinSetupView {
+    margin: 25px auto;
+  }
+
+  h1 {
+    font-size: 26px;
+  }
+
+  .tiles {
+    gap: 9px;
+  }
+
+  .tiles button {
+    min-height: 95px;
+    font-size: 24px;
+    padding: 10px;
+  }
+
+  .tiles button span {
+    font-size: 13px;
+  }
+
+  .welcome {
+    align-items: flex-start;
+  }
+
+  .pool h2 {
+    font-size: 38px;
   }
 }
 
-@media (max-width: 350px) {
-  .container {
-    padding: 20px 14px;
+
+/* =========================
+   SMALL PHONES
+========================= */
+
+@media (max-width: 360px) {
+
+  header b {
+    font-size: 15px;
   }
 
-  .logo {
-    font-size: 20px;
+  .tiles {
+    grid-template-columns: repeat(2, 1fr);
   }
+
+  .panel {
+    padding: 16px;
+  }
+
 }
