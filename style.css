@@ -4,11 +4,11 @@
 :root {
   --gold: #d8ad55;
   --gold-light: #f4d58b;
-  --dark: #080808;
-  --panel: #141414;
-  --text: #f7f3e9;
-  --muted: #a9a49a;
-  --border: rgba(216, 173, 85, 0.25);
+  --dark: #090909;
+  --panel: #151515;
+  --text: #f5f0e5;
+  --muted: #aaa49a;
+  --border: rgba(216, 173, 85, 0.3);
 }
 
 * {
@@ -17,134 +17,80 @@
   box-sizing: border-box;
 }
 
-html {
-  scroll-behavior: smooth;
-}
-
 body {
   min-height: 100vh;
+  padding: 25px 16px;
   background:
-    radial-gradient(circle at top right, #30230e 0, transparent 35%),
-    linear-gradient(135deg, #080808, #11100d);
+    radial-gradient(circle at top right, #30230e, transparent 35%),
+    linear-gradient(135deg, #080808, #12100c);
   color: var(--text);
   font-family: 'DM Sans', sans-serif;
   line-height: 1.6;
 }
 
-button,
-input,
-select {
-  font: inherit;
-}
-
-button {
-  cursor: pointer;
-}
-
-/* GENERAL */
-
-.hidden {
-  display: none !important;
-}
-
 .container {
-  width: min(1100px, 92%);
-  margin: auto;
-}
-
-.gold {
-  color: var(--gold-light);
-}
-
-/* HEADER */
-
-header {
   width: 100%;
-  padding: 22px 5%;
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  border-bottom: 1px solid var(--border);
-  background: rgba(8, 8, 8, 0.85);
-}
-
-.logo,
-.brand {
-  color: var(--gold-light);
-  font-family: 'Playfair Display', serif;
-  font-size: 25px;
-  font-weight: 700;
-  letter-spacing: 0.5px;
-}
-
-.header-label {
-  color: var(--muted);
-  font-size: 13px;
-}
-
-/* LOGIN PAGE */
-
-.login-wrap {
-  min-height: 78vh;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  padding: 45px 18px;
-}
-
-.login-panel {
-  width: 100%;
-  max-width: 470px;
-  padding: 38px;
-  background: linear-gradient(145deg, #191919, #101010);
+  max-width: 620px;
+  margin: 25px auto;
+  padding: 35px;
+  background: linear-gradient(145deg, #1b1b1b, #101010);
   border: 1px solid var(--border);
-  border-radius: 18px;
-  box-shadow: 0 20px 60px rgba(0, 0, 0, 0.5);
+  border-radius: 20px;
+  box-shadow: 0 20px 60px rgba(0, 0, 0, 0.55);
 }
 
-.login-panel h1 {
-  font-family: 'Playfair Display', serif;
-  font-size: 34px;
+/* BRAND */
+
+.logo {
+  text-align: center;
   color: var(--gold-light);
-  margin-bottom: 8px;
+  font-family: 'Playfair Display', serif;
+  font-size: 27px;
+  font-weight: 700;
+  letter-spacing: 1px;
+  margin-bottom: 30px;
 }
 
-.login-panel p {
+/* HEADINGS */
+
+h2 {
+  color: var(--gold-light);
+  font-family: 'Playfair Display', serif;
+  font-size: 29px;
+  margin-bottom: 10px;
+}
+
+.intro {
   color: var(--muted);
-  margin-bottom: 25px;
   font-size: 14px;
+  line-height: 1.8;
+  margin-bottom: 28px;
 }
 
-/* FORM FIELDS */
+/* FORM */
 
-.form-group {
-  margin-bottom: 19px;
-}
-
-.form-group label {
+label {
   display: block;
-  margin-bottom: 8px;
-  color: #e8dfce;
+  margin: 19px 0 8px;
+  color: var(--gold-light);
   font-size: 13px;
-  font-weight: 600;
+  font-weight: 700;
 }
 
-.form-group input,
-.form-group select,
 input,
 select {
+  display: block;
   width: 100%;
-  padding: 14px 15px;
+  padding: 15px;
   background: #090909;
-  border: 1px solid #393329;
-  border-radius: 9px;
-  color: var(--text);
+  border: 1px solid #48402f;
+  border-radius: 10px;
+  color: white;
+  font-size: 14px;
   outline: none;
-  transition: border 0.2s, box-shadow 0.2s;
+  transition: 0.25s ease;
 }
 
-.form-group input:focus,
-.form-group select:focus,
 input:focus,
 select:focus {
   border-color: var(--gold);
@@ -155,248 +101,165 @@ input::placeholder {
   color: #777;
 }
 
-/* BUTTONS */
+input[type="file"] {
+  padding: 12px;
+  cursor: pointer;
+  color: #c9bda4;
+}
 
-button,
-.primary-btn {
+input[type="file"]::file-selector-button {
+  padding: 10px 14px;
+  margin-right: 12px;
   border: none;
-  border-radius: 9px;
-  padding: 14px 20px;
+  border-radius: 7px;
+  background: linear-gradient(135deg, #f4d58b, #bd8730);
+  color: #171006;
   font-weight: 700;
+  cursor: pointer;
+}
+
+/* MEMBERSHIP PRICE */
+
+.price {
+  padding: 22px;
+  margin-top: 20px;
+  background:
+    radial-gradient(circle at top right, #463419, transparent 60%),
+    #1c170f;
+  border: 1px solid rgba(216, 173, 85, 0.45);
+  border-radius: 13px;
+}
+
+.price p {
+  color: #c7b99c;
+  font-size: 13px;
+  margin-bottom: 5px;
+}
+
+.price strong {
+  display: block;
+  color: var(--gold-light);
+  font-size: 31px;
+  font-weight: 800;
+}
+
+/* IMAGE PREVIEW */
+
+.preview {
+  display: none;
+  margin-top: 20px;
+  padding: 15px;
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  background: #0b0b0b;
+}
+
+.preview img {
+  display: block;
+  width: 100%;
+  max-height: 300px;
+  object-fit: contain;
+  margin-top: 10px;
+  border-radius: 8px;
+}
+
+/* SECURITY NOTICE */
+
+.notice {
+  margin-top: 25px;
+  padding: 18px;
+  background: rgba(216, 173, 85, 0.07);
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  color: #d5c8aa;
+  font-size: 13px;
+  line-height: 1.8;
+}
+
+.notice strong {
+  display: block;
+  color: var(--gold-light);
+  margin-bottom: 5px;
+}
+
+/* SUBMIT BUTTON */
+
+button {
+  display: block;
+  width: 100%;
+  padding: 16px;
+  margin-top: 25px;
+  border: none;
+  border-radius: 10px;
+  background: linear-gradient(135deg, #f4d58b, #bd8730);
+  color: #171006;
+  font-size: 15px;
+  font-weight: 800;
+  cursor: pointer;
   transition: 0.25s ease;
 }
 
-.primary-btn,
-.login-panel button,
-#loginForm button {
-  width: 100%;
-  color: #171006;
-  background: linear-gradient(135deg, #f4d58b, #bd8730);
-}
-
-.primary-btn:hover,
-.login-panel button:hover,
-#loginForm button:hover {
+button:hover {
   transform: translateY(-2px);
   box-shadow: 0 8px 25px rgba(216, 173, 85, 0.2);
 }
 
-/* DASHBOARD */
-
-.dashboard {
-  width: min(1100px, 92%);
-  margin: 40px auto;
+button:active {
+  transform: scale(0.98);
 }
 
-.dashboard-heading {
-  margin-bottom: 28px;
-}
+/* SMALL TEXT */
 
-.dashboard-heading h1 {
-  font-family: 'Playfair Display', serif;
-  font-size: 32px;
-  color: var(--gold-light);
-}
-
-.dashboard-heading p {
-  color: var(--muted);
-  margin-top: 5px;
-}
-
-/* PRIZE POOL CARD */
-
-.pool-card {
-  position: relative;
-  overflow: hidden;
-  padding: 35px;
-  margin-bottom: 28px;
-  border-radius: 18px;
-  border: 1px solid rgba(244, 213, 139, 0.45);
-  background:
-    radial-gradient(circle at 90% 10%, rgba(216, 173, 85, 0.25), transparent 35%),
-    linear-gradient(120deg, #282014, #11100d);
-}
-
-.pool-card h2 {
-  color: var(--gold-light);
-  font-family: 'Playfair Display', serif;
-  font-size: 23px;
-  margin-bottom: 10px;
-}
-
-.pool-amount {
-  color: #fff1c8;
-  font-size: clamp(35px, 7vw, 58px);
-  font-weight: 800;
-  letter-spacing: -2px;
-  margin: 12px 0;
-  overflow-wrap: anywhere;
-}
-
-.pool-card p {
-  color: #c4b99f;
-  font-size: 14px;
-}
-
-.currency-box {
-  width: 190px;
-  max-width: 100%;
-  margin-top: 20px;
-}
-
-.currency-box label {
-  display: block;
-  color: var(--gold-light);
-  font-size: 13px;
-  margin-bottom: 7px;
-}
-
-/* MEMBERSHIP */
-
-.section-title {
-  font-family: 'Playfair Display', serif;
-  color: var(--gold-light);
-  font-size: 27px;
-  margin: 35px 0 18px;
-}
-
-.membership-grid {
-  display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  gap: 18px;
-}
-
-.member-card {
-  padding: 25px;
-  background: linear-gradient(145deg, #1a1a1a, #101010);
-  border: 1px solid var(--border);
-  border-radius: 15px;
-  transition: 0.25s;
-}
-
-.member-card:hover {
-  transform: translateY(-5px);
-  border-color: var(--gold);
-}
-
-.member-card h3 {
-  color: var(--gold-light);
-  font-family: 'Playfair Display', serif;
-  font-size: 22px;
-  margin-bottom: 12px;
-}
-
-.member-card p {
-  color: var(--muted);
-  font-size: 14px;
-}
-
-/* INFORMATION NOTICE */
-
-.eligibility {
-  padding: 22px;
-  margin: 28px 0;
-  background: rgba(216, 173, 85, 0.07);
-  border: 1px solid var(--border);
-  border-radius: 12px;
-}
-
-.eligibility h3 {
-  color: var(--gold-light);
-  margin-bottom: 8px;
-}
-
-.eligibility p {
-  color: #c4bdae;
-  font-size: 14px;
-}
-
-/* PROFILE */
-
-.profile-panel {
-  padding: 25px;
-  background: var(--panel);
-  border: 1px solid var(--border);
-  border-radius: 14px;
-  margin-top: 25px;
-}
-
-.profile-panel h3 {
-  color: var(--gold-light);
-  margin-bottom: 15px;
-}
-
-.profile-panel p {
-  color: var(--muted);
-  margin: 8px 0;
-  overflow-wrap: anywhere;
-}
-
-.profile-panel strong {
-  color: var(--text);
-}
-
-#logoutButton {
-  margin-top: 20px;
-  color: var(--gold-light);
-  background: transparent;
-  border: 1px solid var(--gold);
-}
-
-#logoutButton:hover {
-  background: rgba(216, 173, 85, 0.12);
+.small {
+  color: #999;
+  font-size: 12px;
+  line-height: 1.7;
+  margin-top: 12px;
 }
 
 /* FOOTER */
 
 footer {
-  padding: 25px 15px;
-  margin-top: 50px;
+  margin-top: 30px;
+  padding-top: 20px;
   border-top: 1px solid var(--border);
   text-align: center;
-  color: #827d72;
-  font-size: 13px;
+  color: #777;
+  font-size: 12px;
 }
 
-/* MOBILE RESPONSIVENESS */
+/* MOBILE DESIGN */
 
-@media (max-width: 760px) {
-  header {
-    padding: 18px 5%;
+@media (max-width: 600px) {
+  body {
+    padding: 12px;
   }
 
-  .logo,
-  .brand {
-    font-size: 21px;
+  .container {
+    padding: 25px 19px;
+    margin: 12px auto;
+    border-radius: 15px;
   }
 
-  .membership-grid {
-    grid-template-columns: 1fr;
+  .logo {
+    font-size: 23px;
   }
 
-  .login-panel {
-    padding: 27px 21px;
+  h2 {
+    font-size: 25px;
   }
 
-  .login-panel h1 {
-    font-size: 29px;
-  }
-
-  .pool-card {
-    padding: 25px 20px;
-  }
-
-  .dashboard {
-    margin: 25px auto;
+  .price strong {
+    font-size: 27px;
   }
 }
 
-@media (max-width: 380px) {
-  .pool-amount {
-    font-size: 32px;
+@media (max-width: 350px) {
+  .container {
+    padding: 20px 14px;
   }
 
-  .login-panel {
-    padding: 22px 16px;
+  .logo {
+    font-size: 20px;
   }
 }
