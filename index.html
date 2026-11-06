@@ -4,332 +4,328 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta name="theme-color" content="#090909">
-  <title>International Rewards</title>
-  <link rel="stylesheet" href="style.css">
+  <title>International Rewards | Membership</title>
+
+  <style>
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      background: #090909;
+      color: #f5f0e5;
+      font-family: Arial, sans-serif;
+      padding: 20px;
+    }
+
+    .container {
+      max-width: 600px;
+      margin: 25px auto;
+      padding: 28px;
+      background: #151515;
+      border: 1px solid #594522;
+      border-radius: 18px;
+    }
+
+    .logo {
+      text-align: center;
+      color: #e9c77e;
+      font-family: Georgia, serif;
+      font-size: 27px;
+      margin-bottom: 25px;
+    }
+
+    h2 {
+      color: #e9c77e;
+      margin-bottom: 12px;
+    }
+
+    .intro {
+      color: #bbb;
+      line-height: 1.7;
+      margin-bottom: 25px;
+    }
+
+    label {
+      display: block;
+      margin: 18px 0 8px;
+      font-weight: bold;
+      color: #e9c77e;
+    }
+
+    input, select {
+      width: 100%;
+      padding: 14px;
+      border: 1px solid #51452e;
+      border-radius: 9px;
+      background: #090909;
+      color: white;
+      outline: none;
+    }
+
+    input:focus, select:focus {
+      border-color: #e9c77e;
+    }
+
+    .price {
+      margin-top: 18px;
+      padding: 18px;
+      border: 1px solid #594522;
+      border-radius: 12px;
+      background: #201a10;
+    }
+
+    .price strong {
+      color: #f0cf86;
+      font-size: 26px;
+    }
+
+    .notice {
+      background: #241e12;
+      border: 1px solid #68522c;
+      border-radius: 10px;
+      padding: 15px;
+      margin-top: 20px;
+      color: #d7c9a9;
+      font-size: 13px;
+      line-height: 1.6;
+    }
+
+    .preview {
+      display: none;
+      margin-top: 15px;
+    }
+
+    .preview img {
+      width: 100%;
+      max-height: 280px;
+      object-fit: contain;
+      border-radius: 10px;
+      background: #080808;
+    }
+
+    button {
+      width: 100%;
+      padding: 15px;
+      margin-top: 22px;
+      border: none;
+      border-radius: 9px;
+      background: linear-gradient(135deg, #f1d48f, #b88736);
+      color: #171006;
+      font-weight: bold;
+      font-size: 16px;
+      cursor: pointer;
+    }
+
+    button:hover {
+      opacity: .9;
+    }
+
+    .small {
+      color: #999;
+      font-size: 12px;
+      margin-top: 10px;
+      line-height: 1.5;
+    }
+
+    footer {
+      text-align: center;
+      color: #777;
+      margin-top: 25px;
+      font-size: 12px;
+    }
+  </style>
 </head>
 
 <body>
-  <div class="ambient"></div>
 
-  <header class="topbar">
-    <a class="brand" href="#">
-      <span class="brand-mark">IR</span>
-      <span>INTERNATIONAL <b>REWARDS</b></span>
-    </a>
-    <span class="secure-label">
-      <span class="dot"></span> Member portal
-    </span>
-  </header>
+  <main class="container">
 
-  <main>
+    <div class="logo">INTERNATIONAL REWARDS</div>
 
-    <!-- LOGIN PAGE -->
-    <section id="loginView" class="login-wrap">
+    <h2>Membership Submission</h2>
 
-      <div class="intro">
-        <p class="eyebrow">WELCOME TO THE COMMUNITY</p>
+    <p class="intro">
+      Hello sir/madam! Welcome to International Rewards.
+      Please select your membership option and payment method.
+      If you have made a payment, you can submit your receipt
+      for our team to review. Thank you.
+    </p>
 
-        <h1>
-          Your next opportunity<br>
-          <em>starts here.</em>
-        </h1>
+    <form id="membershipForm">
 
-        <p class="muted">
-          Sign in to view programme information,
-          membership options and announcements.
-        </p>
+      <label for="fullName">Full name</label>
+      <input
+        type="text"
+        id="fullName"
+        placeholder="Enter your full name"
+        required
+      >
 
-        <div class="trust-note">
-          <span>✦</span>
-          Clear rules · Member support · Transparent eligibility
-        </div>
+      <label for="membership">Select membership</label>
+      <select id="membership" required>
+        <option value="">Choose membership</option>
+        <option value="Normal Community">Normal Community</option>
+        <option value="Gold Membership">Gold Membership</option>
+        <option value="Platinum Membership">Platinum Membership</option>
+        <option value="Exclusive Membership">Exclusive Membership</option>
+      </select>
+
+      <div class="price">
+        <p>Selected membership price</p>
+        <strong id="price">$0</strong>
       </div>
 
-      <form id="loginForm" class="panel login-panel">
+      <label for="payment">Payment method</label>
+      <select id="payment" required>
+        <option value="">Select payment method</option>
+        <option value="Bank transfer">Bank transfer</option>
+        <option value="Debit or credit card">Debit or credit card</option>
+        <option value="Approved payment provider">Approved payment provider</option>
+      </select>
 
-        <div class="panel-heading">
-          <p class="eyebrow">MEMBER ACCESS</p>
-          <h2>Sign in</h2>
-          <p class="muted small">
-            Enter your details to open the member preview.
-          </p>
-        </div>
+      <label for="amount">Amount paid (USD)</label>
+      <input
+        type="number"
+        id="amount"
+        min="0"
+        step="0.01"
+        placeholder="Enter amount paid"
+        required
+      >
 
-        <label for="fullName">Full name</label>
-        <input
-          id="fullName"
-          name="fullName"
-          type="text"
-          placeholder="Enter your full name"
-          autocomplete="name"
-          required
-          minlength="2"
-          maxlength="80"
-        >
+      <label for="receipt">Upload payment receipt</label>
+      <input
+        type="file"
+        id="receipt"
+        accept="image/jpeg,image/png,image/webp"
+        required
+      >
 
-        <label for="phone">Phone number</label>
-        <input
-          id="phone"
-          name="phone"
-          type="tel"
-          placeholder="e.g. +234 801 234 5678"
-          autocomplete="tel"
-          required
-          minlength="7"
-          maxlength="24"
-        >
-
-        <label for="gender">Gender</label>
-        <select id="gender" name="gender" required>
-          <option value="">Select gender</option>
-          <option value="Female">Female</option>
-          <option value="Male">Male</option>
-          <option value="Prefer not to say">Prefer not to say</option>
-        </select>
-
-        <button class="button primary full" type="submit">
-          Continue to member area <span>→</span>
-        </button>
-
-        <p class="fine-print">
-          This is a demonstration sign-in on this device.
-          Phone ownership is not verified yet.
-        </p>
-
-        <p id="loginError" class="error" role="alert"></p>
-
-      </form>
-    </section>
-
-    <!-- MEMBER DASHBOARD -->
-    <section id="dashboardView" class="dashboard hidden">
-
-      <div class="welcome-row">
-        <div>
-          <p class="eyebrow">MEMBER DASHBOARD</p>
-          <h1>
-            Welcome, <span id="memberName">Member</span>
-          </h1>
-          <p class="muted">
-            Your member information and programme updates.
-          </p>
-        </div>
-
-        <button
-          id="logoutButton"
-          class="button ghost"
-          type="button"
-        >
-          Sign out
-        </button>
+      <div class="preview" id="preview">
+        <p class="small">Receipt preview:</p>
+        <img id="receiptImage" alt="Receipt preview">
       </div>
 
-      <!-- PROMOTIONAL PRIZE POOL -->
-      <section class="pool-card">
-
-        <div>
-          <p class="eyebrow">
-            ANNOUNCED PROGRAMME PRIZE POOL
-          </p>
-
-          <div class="pool-amount" id="poolAmount">
-            $1,500,000
-          </div>
-
-          <p class="muted">
-            Illustrative programme pool — not a personal
-            account balance or guaranteed payout.
-          </p>
-        </div>
-
-        <div class="currency-box">
-          <label for="currencySelect">
-            Display currency
-          </label>
-
-          <select id="currencySelect">
-            <option value="USD">USD — US Dollar</option>
-            <option value="NGN">NGN — Nigerian Naira</option>
-            <option value="GBP">GBP — British Pound</option>
-            <option value="EUR">EUR — Euro</option>
-            <option value="MXN">MXN — Mexican Peso</option>
-            <option value="GHS">GHS — Ghanaian Cedi</option>
-            <option value="KES">KES — Kenyan Shilling</option>
-            <option value="CAD">CAD — Canadian Dollar</option>
-            <option value="AUD">AUD — Australian Dollar</option>
-            <option value="INR">INR — Indian Rupee</option>
-            <option value="ZAR">ZAR — South African Rand</option>
-          </select>
-
-          <small id="rateNote">
-            Approximate display conversion only.
-          </small>
-        </div>
-
-      </section>
-
-      <!-- MEMBERSHIP CARDS -->
-      <div class="section-title">
-
-        <div>
-          <p class="eyebrow">MEMBERSHIP OPTIONS</p>
-          <h2>Choose your membership</h2>
-        </div>
-
-        <span class="status-pill">
-          Applications open
-        </span>
-
+      <div class="notice">
+        <strong>Security notice</strong><br>
+        Upload only a payment receipt. Do not upload gift-card
+        redemption codes, PINs, passwords or pictures showing
+        secret details of a gift card.
+        Never send your banking password or OTP.
       </div>
 
-      <p class="muted section-copy">
-        Membership card designs are shown below.
-        Any price, payment method, benefits and eligibility
-        requirements must be published clearly before a purchase.
+      <button type="submit">
+        Continue to WhatsApp Support
+      </button>
+
+      <p class="small">
+        Your submission is a request for review. It does not
+        guarantee membership approval or a cash reward.
+        Membership prices and programme conditions should be
+        published clearly before payment.
       </p>
 
-      <div class="card-grid">
+    </form>
 
-        <article class="member-card basic">
-          <div class="card-top">
-            <span>IR / 01</span>
-            <span class="card-chip">✦</span>
-          </div>
-
-          <div>
-            <p class="card-tier">BASIC</p>
-            <h3>Community</h3>
-            <p class="card-desc">
-              Programme news and community updates.
-            </p>
-          </div>
-
-          <div class="card-bottom">
-            <span>INTERNATIONAL REWARDS</span>
-            <b>01</b>
-          </div>
-        </article>
-
-        <article class="member-card gold">
-          <div class="card-top">
-            <span>IR / 02</span>
-            <span class="card-chip">✦</span>
-          </div>
-
-          <div>
-            <p class="card-tier">GOLD</p>
-            <h3>Gold Member</h3>
-            <p class="card-desc">
-              Member profile and programme updates.
-            </p>
-          </div>
-
-          <div class="card-bottom">
-            <span>INTERNATIONAL REWARDS</span>
-            <b>02</b>
-          </div>
-        </article>
-
-        <article class="member-card platinum">
-          <div class="card-top">
-            <span>IR / 03</span>
-            <span class="card-chip">✦</span>
-          </div>
-
-          <div>
-            <p class="card-tier">PLATINUM</p>
-            <h3>Platinum Member</h3>
-            <p class="card-desc">
-              Priority community information.
-            </p>
-          </div>
-
-          <div class="card-bottom">
-            <span>INTERNATIONAL REWARDS</span>
-            <b>03</b>
-          </div>
-        </article>
-
-      </div>
-
-      <!-- PARTICIPATION INFORMATION -->
-      <section class="panel eligibility">
-
-        <div>
-          <p class="eyebrow">IMPORTANT INFORMATION</p>
-
-          <h2>How participation works</h2>
-
-          <p class="muted">
-            A membership card or group membership does not
-            guarantee a prize or create a withdrawable cash
-            balance. Publish the official rules, selection
-            method, eligibility, fees (if any), and payout
-            timetable before accepting payments or applications.
-          </p>
-        </div>
-
-        <ul>
-          <li>Read the official programme rules.</li>
-          <li>Submit a membership application for review.</li>
-          <li>
-            Only approved, eligible participants can take part
-            in any prize process.
-          </li>
-        </ul>
-
-      </section>
-
-      <!-- MEMBER PROFILE -->
-      <section class="panel profile-panel">
-
-        <div>
-          <p class="eyebrow">YOUR PROFILE</p>
-          <h2>Member details</h2>
-        </div>
-
-        <div class="profile-grid">
-
-          <div>
-            <small>Full name</small>
-            <b id="profileName">—</b>
-          </div>
-
-          <div>
-            <small>Phone</small>
-            <b id="profilePhone">—</b>
-          </div>
-
-          <div>
-            <small>Gender</small>
-            <b id="profileGender">—</b>
-          </div>
-
-          <div>
-            <small>Session</small>
-            <b>Preview access</b>
-          </div>
-
-        </div>
-
-      </section>
-
-    </section>
+    <footer>
+      © 2026 International Rewards. All rights reserved.
+    </footer>
 
   </main>
 
-  <footer>
-    <span>
-      © <span id="year"></span> International Rewards
-    </span>
+  <script>
+    const prices = {
+      "Normal Community": 500,
+      "Gold Membership": 1000,
+      "Platinum Membership": 1750,
+      "Exclusive Membership": 3550
+    };
 
-    <span>
-      Programme information · Support
-    </span>
-  </footer>
+    const membership = document.getElementById("membership");
+    const price = document.getElementById("price");
+    const receipt = document.getElementById("receipt");
+    const preview = document.getElementById("preview");
+    const receiptImage = document.getElementById("receiptImage");
 
-  <script src="script.js"></script>
+    membership.addEventListener("change", function () {
+      const selected = membership.value;
+
+      price.textContent = selected
+        ? "$" + prices[selected].toLocaleString("en-US")
+        : "$0";
+    });
+
+    receipt.addEventListener("change", function () {
+      const file = this.files[0];
+
+      if (!file) return;
+
+      if (!file.type.startsWith("image/")) {
+        alert("Please select an image.");
+        this.value = "";
+        preview.style.display = "none";
+        return;
+      }
+
+      if (file.size > 5 * 1024 * 1024) {
+        alert("Image must be smaller than 5MB.");
+        this.value = "";
+        preview.style.display = "none";
+        return;
+      }
+
+      const reader = new FileReader();
+
+      reader.onload = function (event) {
+        receiptImage.src = event.target.result;
+        preview.style.display = "block";
+      };
+
+      reader.readAsDataURL(file);
+    });
+
+    document.getElementById("membershipForm")
+      .addEventListener("submit", function (event) {
+        event.preventDefault();
+
+        const name = document.getElementById("fullName").value.trim();
+        const plan = membership.value;
+        const method = document.getElementById("payment").value;
+        const amount = document.getElementById("amount").value;
+
+        if (
+          !name ||
+          !plan ||
+          !method ||
+          !amount ||
+          !receipt.files.length
+        ) {
+          alert("Please complete all fields.");
+          return;
+        }
+
+        const message =
+          "Hello International Rewards Support.\n\n" +
+          "I would like to submit my membership payment for review.\n\n" +
+          "Name: " + name + "\n" +
+          "Membership: " + plan + "\n" +
+          "Listed price: $" + prices[plan] + "\n" +
+          "Payment method: " + method + "\n" +
+          "Amount paid: $" + amount + "\n\n" +
+          "I will attach my payment receipt in this WhatsApp chat.";
+
+        const whatsappNumber = "2349040071415";
+
+        const url =
+          "https://wa.me/" + whatsappNumber +
+          "?text=" + encodeURIComponent(message);
+
+        window.open(url, "_blank");
+      });
+  </script>
 
 </body>
 </html>
