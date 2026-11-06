@@ -4,328 +4,317 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>International Rewards | Membership</title>
+  <title>International Rewards</title>
 
-  <style>
-    * {
-      box-sizing: border-box;
-      margin: 0;
-      padding: 0;
-    }
+  <link rel="stylesheet" href="style.css">
 
-    body {
-      background: #090909;
-      color: #f5f0e5;
-      font-family: Arial, sans-serif;
-      padding: 20px;
-    }
-
-    .container {
-      max-width: 600px;
-      margin: 25px auto;
-      padding: 28px;
-      background: #151515;
-      border: 1px solid #594522;
-      border-radius: 18px;
-    }
-
-    .logo {
-      text-align: center;
-      color: #e9c77e;
-      font-family: Georgia, serif;
-      font-size: 27px;
-      margin-bottom: 25px;
-    }
-
-    h2 {
-      color: #e9c77e;
-      margin-bottom: 12px;
-    }
-
-    .intro {
-      color: #bbb;
-      line-height: 1.7;
-      margin-bottom: 25px;
-    }
-
-    label {
-      display: block;
-      margin: 18px 0 8px;
-      font-weight: bold;
-      color: #e9c77e;
-    }
-
-    input, select {
-      width: 100%;
-      padding: 14px;
-      border: 1px solid #51452e;
-      border-radius: 9px;
-      background: #090909;
-      color: white;
-      outline: none;
-    }
-
-    input:focus, select:focus {
-      border-color: #e9c77e;
-    }
-
-    .price {
-      margin-top: 18px;
-      padding: 18px;
-      border: 1px solid #594522;
-      border-radius: 12px;
-      background: #201a10;
-    }
-
-    .price strong {
-      color: #f0cf86;
-      font-size: 26px;
-    }
-
-    .notice {
-      background: #241e12;
-      border: 1px solid #68522c;
-      border-radius: 10px;
-      padding: 15px;
-      margin-top: 20px;
-      color: #d7c9a9;
-      font-size: 13px;
-      line-height: 1.6;
-    }
-
-    .preview {
-      display: none;
-      margin-top: 15px;
-    }
-
-    .preview img {
-      width: 100%;
-      max-height: 280px;
-      object-fit: contain;
-      border-radius: 10px;
-      background: #080808;
-    }
-
-    button {
-      width: 100%;
-      padding: 15px;
-      margin-top: 22px;
-      border: none;
-      border-radius: 9px;
-      background: linear-gradient(135deg, #f1d48f, #b88736);
-      color: #171006;
-      font-weight: bold;
-      font-size: 16px;
-      cursor: pointer;
-    }
-
-    button:hover {
-      opacity: .9;
-    }
-
-    .small {
-      color: #999;
-      font-size: 12px;
-      margin-top: 10px;
-      line-height: 1.5;
-    }
-
-    footer {
-      text-align: center;
-      color: #777;
-      margin-top: 25px;
-      font-size: 12px;
-    }
-  </style>
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+  <script defer src="script.js"></script>
 </head>
 
 <body>
 
-  <main class="container">
+  <header>
+    <b>INTERNATIONAL REWARDS</b>
+    <span>Secure member access</span>
+  </header>
 
-    <div class="logo">INTERNATIONAL REWARDS</div>
+  <main>
 
-    <h2>Membership Submission</h2>
+    <!-- LOGIN PAGE -->
+    <section id="loginView" class="panel">
 
-    <p class="intro">
-      Hello sir/madam! Welcome to International Rewards.
-      Please select your membership option and payment method.
-      If you have made a payment, you can submit your receipt
-      for our team to review. Thank you.
-    </p>
+      <h1>Welcome</h1>
+      <p>Sign in with your phone. A one-time code will be sent to you.</p>
 
-    <form id="membershipForm">
+      <form id="sendOtpForm">
 
-      <label for="fullName">Full name</label>
-      <input
-        type="text"
-        id="fullName"
-        placeholder="Enter your full name"
-        required
-      >
+        <label>Full name (new members)</label>
+        <input
+          id="fullName"
+          type="text"
+          placeholder="Full name"
+        >
 
-      <label for="membership">Select membership</label>
-      <select id="membership" required>
-        <option value="">Choose membership</option>
-        <option value="Normal Community">Normal Community</option>
-        <option value="Gold Membership">Gold Membership</option>
-        <option value="Platinum Membership">Platinum Membership</option>
-        <option value="Exclusive Membership">Exclusive Membership</option>
-      </select>
+        <label>Phone number with country code</label>
+        <input
+          id="phone"
+          type="tel"
+          placeholder="+234..."
+          required
+        >
 
-      <div class="price">
-        <p>Selected membership price</p>
-        <strong id="price">$0</strong>
-      </div>
+        <label>Gender (new members)</label>
+        <select id="gender">
+          <option value="">Select</option>
+          <option>Female</option>
+          <option>Male</option>
+          <option>Prefer not to say</option>
+        </select>
 
-      <label for="payment">Payment method</label>
-      <select id="payment" required>
-        <option value="">Select payment method</option>
-        <option value="Bank transfer">Bank transfer</option>
-        <option value="Debit or credit card">Debit or credit card</option>
-        <option value="Approved payment provider">Approved payment provider</option>
-      </select>
+        <button type="submit">Send verification code</button>
 
-      <label for="amount">Amount paid (USD)</label>
-      <input
-        type="number"
-        id="amount"
-        min="0"
-        step="0.01"
-        placeholder="Enter amount paid"
-        required
-      >
+      </form>
 
-      <label for="receipt">Upload payment receipt</label>
-      <input
-        type="file"
-        id="receipt"
-        accept="image/jpeg,image/png,image/webp"
-        required
-      >
+      <form id="verifyOtpForm" class="hidden">
 
-      <div class="preview" id="preview">
-        <p class="small">Receipt preview:</p>
-        <img id="receiptImage" alt="Receipt preview">
-      </div>
+        <label>Six-digit OTP</label>
+        <input
+          id="otp"
+          inputmode="numeric"
+          maxlength="6"
+          required
+        >
 
-      <div class="notice">
-        <strong>Security notice</strong><br>
-        Upload only a payment receipt. Do not upload gift-card
-        redemption codes, PINs, passwords or pictures showing
-        secret details of a gift card.
-        Never send your banking password or OTP.
-      </div>
+        <button type="submit">Verify and continue</button>
 
-      <button type="submit">
-        Continue to WhatsApp Support
-      </button>
+      </form>
 
-      <p class="small">
-        Your submission is a request for review. It does not
-        guarantee membership approval or a cash reward.
-        Membership prices and programme conditions should be
-        published clearly before payment.
+      <p class="notice">
+        Phone login requires an SMS provider configured in Supabase.
+        Never share your OTP with anyone.
       </p>
 
-    </form>
+    </section>
 
-    <footer>
-      © 2026 International Rewards. All rights reserved.
-    </footer>
+
+    <!-- WITHDRAWAL PIN SETUP -->
+    <section id="pinSetupView" class="panel hidden">
+
+      <h1>Create withdrawal PIN</h1>
+
+      <p>
+        Create a private four-digit PIN.
+        Do not use your bank-card PIN.
+      </p>
+
+      <form id="pinSetupForm">
+
+        <label>New 4-digit PIN</label>
+        <input
+          id="newPin"
+          type="password"
+          inputmode="numeric"
+          maxlength="4"
+          pattern="[0-9]{4}"
+          required
+        >
+
+        <label>Confirm PIN</label>
+        <input
+          id="confirmPin"
+          type="password"
+          inputmode="numeric"
+          maxlength="4"
+          pattern="[0-9]{4}"
+          required
+        >
+
+        <button type="submit">
+          Create PIN and continue
+        </button>
+
+      </form>
+
+    </section>
+
+
+    <!-- MEMBER DASHBOARD -->
+    <section id="dashboardView" class="hidden">
+
+      <div class="welcome">
+        <h1 id="memberName">Member dashboard</h1>
+        <button id="logoutButton" class="secondary">
+          Log out
+        </button>
+      </div>
+
+      <!-- PROGRAMME PRIZE POOL -->
+      <div class="panel pool">
+
+        <p>Programme prize pool</p>
+
+        <h2>$1,500,000</h2>
+
+        <small>
+          This is not a personal wallet balance
+          or a guaranteed reward.
+        </small>
+
+      </div>
+
+
+      <!-- DASHBOARD BUTTONS -->
+      <div class="tiles">
+
+        <button type="button" data-view="walletView">
+          ◫
+          <span>Wallet</span>
+        </button>
+
+        <button type="button" data-view="transferView">
+          ➤
+          <span>Transfer</span>
+        </button>
+
+        <button type="button" data-view="withdrawView">
+          ▤
+          <span>Withdraw</span>
+        </button>
+
+        <button type="button" data-view="savingsView">
+          ♧
+          <span>Savings</span>
+        </button>
+
+        <button type="button" data-view="inviteView">
+          ♙
+          <span>Invite</span>
+        </button>
+
+        <button type="button" data-view="rewardsView">
+          ✧
+          <span>Rewards</span>
+        </button>
+
+      </div>
+
+
+      <!-- WALLET -->
+      <section id="walletView" class="panel subview">
+
+        <h2>Wallet</h2>
+
+        <p>
+          A verified personal balance will appear when
+          a real reward ledger is connected.
+          The prize-pool figure is not your balance.
+        </p>
+
+      </section>
+
+
+      <!-- TRANSFER -->
+      <section id="transferView" class="panel subview hidden">
+
+        <h2>Transfer</h2>
+
+        <p>
+          Transfer features are not enabled yet.
+          Never share gift-card redemption codes or PINs.
+        </p>
+
+      </section>
+
+
+      <!-- WITHDRAWAL -->
+      <section id="withdrawView" class="panel subview hidden">
+
+        <h2>Withdrawal request</h2>
+
+        <p>
+          Requests are reviewed. Only verified,
+          available rewards can be paid.
+          Submission does not guarantee payment.
+        </p>
+
+        <form id="withdrawForm">
+
+          <label>Bank name</label>
+          <input id="bankName" required>
+
+          <label>Account name</label>
+          <input id="accountName" required>
+
+          <label>Account number</label>
+          <input
+            id="accountNumber"
+            inputmode="numeric"
+            maxlength="20"
+            required
+          >
+
+          <label>Amount (USD)</label>
+          <input
+            id="withdrawAmount"
+            type="number"
+            min="1"
+            step="0.01"
+            required
+          >
+
+          <label>Withdrawal PIN</label>
+          <input
+            id="withdrawPin"
+            type="password"
+            inputmode="numeric"
+            maxlength="4"
+            pattern="[0-9]{4}"
+            required
+          >
+
+          <button type="submit">
+            Submit withdrawal request
+          </button>
+
+        </form>
+
+        <p
+          id="withdrawMessage"
+          class="notice"
+          aria-live="polite"
+        ></p>
+
+      </section>
+
+
+      <!-- SAVINGS -->
+      <section id="savingsView" class="panel subview hidden">
+
+        <h2>Savings</h2>
+
+        <p>
+          Savings information will appear when
+          a real savings product is configured.
+        </p>
+
+      </section>
+
+
+      <!-- INVITE -->
+      <section id="inviteView" class="panel subview hidden">
+
+        <h2>Invite</h2>
+
+        <p>
+          Referral terms must be published
+          before referrals are activated.
+        </p>
+
+      </section>
+
+
+      <!-- REWARDS -->
+      <section id="rewardsView" class="panel subview hidden">
+
+        <h2>Rewards</h2>
+
+        <p>
+          Published reward rules and eligibility
+          will appear here. Membership does not
+          guarantee cash rewards.
+        </p>
+
+      </section>
+
+    </section>
 
   </main>
 
-  <script>
-    const prices = {
-      "Normal Community": 500,
-      "Gold Membership": 1000,
-      "Platinum Membership": 1750,
-      "Exclusive Membership": 3550
-    };
 
-    const membership = document.getElementById("membership");
-    const price = document.getElementById("price");
-    const receipt = document.getElementById("receipt");
-    const preview = document.getElementById("preview");
-    const receiptImage = document.getElementById("receiptImage");
-
-    membership.addEventListener("change", function () {
-      const selected = membership.value;
-
-      price.textContent = selected
-        ? "$" + prices[selected].toLocaleString("en-US")
-        : "$0";
-    });
-
-    receipt.addEventListener("change", function () {
-      const file = this.files[0];
-
-      if (!file) return;
-
-      if (!file.type.startsWith("image/")) {
-        alert("Please select an image.");
-        this.value = "";
-        preview.style.display = "none";
-        return;
-      }
-
-      if (file.size > 5 * 1024 * 1024) {
-        alert("Image must be smaller than 5MB.");
-        this.value = "";
-        preview.style.display = "none";
-        return;
-      }
-
-      const reader = new FileReader();
-
-      reader.onload = function (event) {
-        receiptImage.src = event.target.result;
-        preview.style.display = "block";
-      };
-
-      reader.readAsDataURL(file);
-    });
-
-    document.getElementById("membershipForm")
-      .addEventListener("submit", function (event) {
-        event.preventDefault();
-
-        const name = document.getElementById("fullName").value.trim();
-        const plan = membership.value;
-        const method = document.getElementById("payment").value;
-        const amount = document.getElementById("amount").value;
-
-        if (
-          !name ||
-          !plan ||
-          !method ||
-          !amount ||
-          !receipt.files.length
-        ) {
-          alert("Please complete all fields.");
-          return;
-        }
-
-        const message =
-          "Hello International Rewards Support.\n\n" +
-          "I would like to submit my membership payment for review.\n\n" +
-          "Name: " + name + "\n" +
-          "Membership: " + plan + "\n" +
-          "Listed price: $" + prices[plan] + "\n" +
-          "Payment method: " + method + "\n" +
-          "Amount paid: $" + amount + "\n\n" +
-          "I will attach my payment receipt in this WhatsApp chat.";
-
-        const whatsappNumber = "2349040071415";
-
-        const url =
-          "https://wa.me/" + whatsappNumber +
-          "?text=" + encodeURIComponent(message);
-
-        window.open(url, "_blank");
-      });
-  </script>
+  <footer>
+    © 2026 International Rewards
+  </footer>
 
 </body>
 </html>
