@@ -4,323 +4,332 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta name="theme-color" content="#080d18">
-  <meta name="description" content="International community giveaways and rewards.">
-  <title>International Giveaway</title>
+  <meta name="theme-color" content="#090909">
+  <title>International Rewards</title>
   <link rel="stylesheet" href="style.css">
 </head>
+
 <body>
+  <div class="ambient"></div>
 
-<header class="navbar">
-  <a href="#" class="logo">✦ INTERNATIONAL REWARDS</a>
+  <header class="topbar">
+    <a class="brand" href="#">
+      <span class="brand-mark">IR</span>
+      <span>INTERNATIONAL <b>REWARDS</b></span>
+    </a>
+    <span class="secure-label">
+      <span class="dot"></span> Member portal
+    </span>
+  </header>
 
-  <div class="nav-actions">
-    <select id="language" aria-label="Language">
-      <option value="en">English</option>
-      <option value="es">Español</option>
-      <option value="fr">Français</option>
-    </select>
-    <button class="gold-btn" onclick="showPage('login')">Login</button>
-  </div>
-</header>
+  <main>
 
-<section class="hero">
-  <div class="hero-overlay">
-    <span class="eyebrow">WELCOME TO OUR GLOBAL COMMUNITY</span>
-    <h1>Rewards Without<br>Boundaries.</h1>
-    <p>Discover community giveaways, announcements and rewards.</p>
+    <!-- LOGIN PAGE -->
+    <section id="loginView" class="login-wrap">
 
-    <div class="fund">
-      <small>PROPOSED GIVEAWAY POOL</small>
-      <h2>$1,500,000</h2>
-      <small>Proposed amount, subject to actual funding</small>
-    </div>
+      <div class="intro">
+        <p class="eyebrow">WELCOME TO THE COMMUNITY</p>
 
-    <button class="gold-btn" onclick="showPage('register')">
-      Create Account →
-    </button>
-  </div>
-</section>
+        <h1>
+          Your next opportunity<br>
+          <em>starts here.</em>
+        </h1>
 
-<main class="container">
+        <p class="muted">
+          Sign in to view programme information,
+          membership options and announcements.
+        </p>
 
-  <!-- REGISTRATION -->
-
-  <section id="register" class="panel hidden">
-    <h2>Create Your Account</h2>
-    <p>Join our international community.</p>
-
-    <form id="registerForm">
-      <label>Full name</label>
-      <input id="fullName" maxlength="100" required
-        placeholder="Enter your full name">
-
-      <label>Phone number</label>
-      <input id="phone" type="tel" maxlength="20" required
-        placeholder="+234...">
-
-      <label>Email address (optional)</label>
-      <input id="memberEmail" type="email"
-        placeholder="Your email address">
-
-      <label>Country</label>
-      <select id="country" required>
-        <option value="">Select your country</option>
-        <option>Nigeria</option>
-        <option>United Kingdom</option>
-        <option>United States</option>
-        <option>Ghana</option>
-        <option>Mexico</option>
-        <option>Canada</option>
-        <option>South Africa</option>
-        <option>Other</option>
-      </select>
-
-      <label>Membership interest</label>
-      <select id="memberPlan">
-        <option>Normal</option>
-        <option>Gold</option>
-        <option>Platinum</option>
-        <option>Exclusive</option>
-      </select>
-
-      <label>Referral code (optional)</label>
-      <input id="referralCode" placeholder="Referral code">
-
-      <!-- Honeypot anti-spam field -->
-      <input class="honeypot" name="website" tabindex="-1"
-        autocomplete="off" aria-hidden="true">
-
-      <label class="check-row">
-        <input type="checkbox" id="agree" required>
-        I agree to the privacy notice and terms.
-      </label>
-
-      <button class="gold-btn full" type="submit">
-        Submit Registration
-      </button>
-    </form>
-
-    <p class="small">
-      This static version records registration requests through
-      the configured notification service. It does not create
-      a password-protected financial account.
-    </p>
-  </section>
-
-  <!-- LOGIN DEMONSTRATION -->
-
-  <section id="login" class="panel hidden">
-    <h2>Member Login</h2>
-    <p>Secure member login will be available after backend authentication is installed.</p>
-    <input type="tel" placeholder="Phone number" disabled>
-    <input type="password" placeholder="Password" disabled>
-    <button class="gold-btn full" disabled>Login unavailable in static version</button>
-  </section>
-
-  <!-- DASHBOARD PREVIEW -->
-
-  <section id="dashboard" class="hidden">
-    <div class="welcome">
-      <div>
-        <span class="small">MEMBER DASHBOARD PREVIEW</span>
-        <h2>Welcome, <span id="memberName">Member</span></h2>
+        <div class="trust-note">
+          <span>✦</span>
+          Clear rules · Member support · Transparent eligibility
+        </div>
       </div>
-      <button class="outline-btn" onclick="logout()">Logout</button>
-    </div>
 
-    <div class="balance-card">
-      <span>DEMONSTRATION REWARD BALANCE</span>
-      <h1>$0.00</h1>
-      <p>No real funds are stored in this website.</p>
-    </div>
+      <form id="loginForm" class="panel login-panel">
 
-    <h3 class="section-heading">Your Account Services</h3>
+        <div class="panel-heading">
+          <p class="eyebrow">MEMBER ACCESS</p>
+          <h2>Sign in</h2>
+          <p class="muted small">
+            Enter your details to open the member preview.
+          </p>
+        </div>
 
-    <div class="service-grid">
-      <button onclick="accountAction('Wallet')">👛<span>Wallet</span></button>
-      <button onclick="accountAction('Transfer')">💸<span>Transfer</span></button>
-      <button onclick="accountAction('Withdrawal')">🏦<span>Withdraw</span></button>
-      <button onclick="accountAction('Savings')">🐷<span>Savings</span></button>
-      <button onclick="accountAction('Referrals')">👥<span>Invitations</span></button>
-      <button onclick="accountAction('Rewards')">🎁<span>Rewards</span></button>
-    </div>
+        <label for="fullName">Full name</label>
+        <input
+          id="fullName"
+          name="fullName"
+          type="text"
+          placeholder="Enter your full name"
+          autocomplete="name"
+          required
+          minlength="2"
+          maxlength="80"
+        >
 
-    <div class="notice">
-      Real financial services are not activated. Never submit
-      gift-card codes or pay a fee to unlock a promised withdrawal.
-    </div>
-  </section>
+        <label for="phone">Phone number</label>
+        <input
+          id="phone"
+          name="phone"
+          type="tel"
+          placeholder="e.g. +234 801 234 5678"
+          autocomplete="tel"
+          required
+          minlength="7"
+          maxlength="24"
+        >
 
-  <!-- MEMBERSHIP PLANS -->
+        <label for="gender">Gender</label>
+        <select id="gender" name="gender" required>
+          <option value="">Select gender</option>
+          <option value="Female">Female</option>
+          <option value="Male">Male</option>
+          <option value="Prefer not to say">Prefer not to say</option>
+        </select>
 
-  <h2 class="section-heading">Membership Plans</h2>
+        <button class="button primary full" type="submit">
+          Continue to member area <span>→</span>
+        </button>
 
-  <div class="plans">
-    <article class="plan">
-      <h3>Normal</h3>
-      <h2>$500</h2>
-      <p>Basic membership information.</p>
-      <button onclick="selectPlan('Normal')">View Details</button>
-    </article>
+        <p class="fine-print">
+          This is a demonstration sign-in on this device.
+          Phone ownership is not verified yet.
+        </p>
 
-    <article class="plan">
-      <h3>Gold</h3>
-      <h2>$1,000</h2>
-      <p>Gold membership information.</p>
-      <button onclick="selectPlan('Gold')">View Details</button>
-    </article>
+        <p id="loginError" class="error" role="alert"></p>
 
-    <article class="plan featured">
-      <span class="tag">POPULAR</span>
-      <h3>Platinum</h3>
-      <h2>$1,750</h2>
-      <p>Platinum membership information.</p>
-      <button onclick="selectPlan('Platinum')">View Details</button>
-    </article>
+      </form>
+    </section>
 
-    <article class="plan">
-      <h3>Exclusive</h3>
-      <h2>$3,550</h2>
-      <p>Exclusive membership information.</p>
-      <button onclick="selectPlan('Exclusive')">View Details</button>
-    </article>
-  </div>
+    <!-- MEMBER DASHBOARD -->
+    <section id="dashboardView" class="dashboard hidden">
 
-  <p class="small">
-    Prices are proposed examples, not payment requests or
-    guarantees of rewards or financial returns.
-  </p>
+      <div class="welcome-row">
+        <div>
+          <p class="eyebrow">MEMBER DASHBOARD</p>
+          <h1>
+            Welcome, <span id="memberName">Member</span>
+          </h1>
+          <p class="muted">
+            Your member information and programme updates.
+          </p>
+        </div>
 
-  <!-- SERVICES -->
+        <button
+          id="logoutButton"
+          class="button ghost"
+          type="button"
+        >
+          Sign out
+        </button>
+      </div>
 
-  <h2 class="section-heading">Services & Utilities</h2>
+      <!-- PROMOTIONAL PRIZE POOL -->
+      <section class="pool-card">
 
-  <div class="service-grid">
-    <div>📱<span>Airtime</span></div>
-    <div>🌐<span>Internet Data</span></div>
-    <div>🎮<span>Betting</span></div>
-    <div>📺<span>TV Subscription</span></div>
-    <div>💡<span>Electricity</span></div>
-    <div>🏦<span>Banking</span></div>
-  </div>
+        <div>
+          <p class="eyebrow">
+            ANNOUNCED PROGRAMME PRIZE POOL
+          </p>
 
-  <!-- CURRENCY -->
+          <div class="pool-amount" id="poolAmount">
+            $1,500,000
+          </div>
 
-  <h2 class="section-heading">Currency Preference</h2>
+          <p class="muted">
+            Illustrative programme pool — not a personal
+            account balance or guaranteed payout.
+          </p>
+        </div>
 
-  <select id="currency" class="currency-select">
-    <option value="USD">USD - US Dollar</option>
-    <option value="NGN">NGN - Nigerian Naira</option>
-    <option value="GBP">GBP - British Pound</option>
-    <option value="EUR">EUR - Euro</option>
-    <option value="MXN">MXN - Mexican Peso</option>
-    <option value="GHS">GHS - Ghana Cedi</option>
-    <option value="KES">KES - Kenyan Shilling</option>
-  </select>
+        <div class="currency-box">
+          <label for="currencySelect">
+            Display currency
+          </label>
 
-  <p id="currencyStatus" class="small">
-    Select your preferred currency.
-  </p>
+          <select id="currencySelect">
+            <option value="USD">USD — US Dollar</option>
+            <option value="NGN">NGN — Nigerian Naira</option>
+            <option value="GBP">GBP — British Pound</option>
+            <option value="EUR">EUR — Euro</option>
+            <option value="MXN">MXN — Mexican Peso</option>
+            <option value="GHS">GHS — Ghanaian Cedi</option>
+            <option value="KES">KES — Kenyan Shilling</option>
+            <option value="CAD">CAD — Canadian Dollar</option>
+            <option value="AUD">AUD — Australian Dollar</option>
+            <option value="INR">INR — Indian Rupee</option>
+            <option value="ZAR">ZAR — South African Rand</option>
+          </select>
 
-  <!-- PUBLIC ANNOUNCEMENTS -->
+          <small id="rateNote">
+            Approximate display conversion only.
+          </small>
+        </div>
 
-  <h2 class="section-heading">Official Announcements</h2>
+      </section>
 
-  <div id="posts">
-    <article class="post">
-      <h3>Welcome to International Rewards</h3>
-      <p>Stay updated with our official community announcements.</p>
-    </article>
-  </div>
+      <!-- MEMBERSHIP CARDS -->
+      <div class="section-title">
 
-  <!-- PRIVATE PICTURE SUBMISSION -->
+        <div>
+          <p class="eyebrow">MEMBERSHIP OPTIONS</p>
+          <h2>Choose your membership</h2>
+        </div>
 
-  <section class="panel">
-    <h2>Send a Picture to the Administrator</h2>
-    <p>Pictures submitted here are sent privately for review.
-      They will not automatically appear in public announcements.</p>
+        <span class="status-pill">
+          Applications open
+        </span>
 
-    <form id="pictureForm">
-      <label>Your name</label>
-      <input id="pictureName" required maxlength="100">
+      </div>
 
-      <label>Your phone number</label>
-      <input id="picturePhone" type="tel" required maxlength="20">
+      <p class="muted section-copy">
+        Membership card designs are shown below.
+        Any price, payment method, benefits and eligibility
+        requirements must be published clearly before a purchase.
+      </p>
 
-      <label>Picture</label>
-      <input id="pictureFile" type="file"
-        accept="image/jpeg,image/png,image/webp" required>
+      <div class="card-grid">
 
-      <label>Message (optional)</label>
-      <textarea id="pictureMessage" maxlength="500"
-        placeholder="Write a short message"></textarea>
+        <article class="member-card basic">
+          <div class="card-top">
+            <span>IR / 01</span>
+            <span class="card-chip">✦</span>
+          </div>
 
-      <label class="check-row">
-        <input type="checkbox" id="pictureConsent" required>
-        I agree to send this picture privately to the administrator.
-      </label>
+          <div>
+            <p class="card-tier">BASIC</p>
+            <h3>Community</h3>
+            <p class="card-desc">
+              Programme news and community updates.
+            </p>
+          </div>
 
-      <button class="gold-btn full" type="submit">
-        Submit Picture
-      </button>
-    </form>
-  </section>
+          <div class="card-bottom">
+            <span>INTERNATIONAL REWARDS</span>
+            <b>01</b>
+          </div>
+        </article>
 
-  <!-- ADMIN PUBLISHING PREVIEW -->
+        <article class="member-card gold">
+          <div class="card-top">
+            <span>IR / 02</span>
+            <span class="card-chip">✦</span>
+          </div>
 
-  <section class="panel">
-    <h2>Administrator – Post Preview</h2>
-    <p class="small">
-      Local preview only. This is not a secure admin login.
-      Public publishing requires an authenticated storage service.
-    </p>
+          <div>
+            <p class="card-tier">GOLD</p>
+            <h3>Gold Member</h3>
+            <p class="card-desc">
+              Member profile and programme updates.
+            </p>
+          </div>
 
-    <input id="postTitle" placeholder="Announcement title">
-    <textarea id="postContent" placeholder="Write announcement"></textarea>
-    <input id="postImage" type="file"
-      accept="image/jpeg,image/png,image/webp">
+          <div class="card-bottom">
+            <span>INTERNATIONAL REWARDS</span>
+            <b>02</b>
+          </div>
+        </article>
 
-    <button class="gold-btn full" onclick="publishPost()">
-      Preview My Announcement
-    </button>
-  </section>
+        <article class="member-card platinum">
+          <div class="card-top">
+            <span>IR / 03</span>
+            <span class="card-chip">✦</span>
+          </div>
 
-</main>
+          <div>
+            <p class="card-tier">PLATINUM</p>
+            <h3>Platinum Member</h3>
+            <p class="card-desc">
+              Priority community information.
+            </p>
+          </div>
 
-<!-- PRIVACY NOTICE -->
+          <div class="card-bottom">
+            <span>INTERNATIONAL REWARDS</span>
+            <b>03</b>
+          </div>
+        </article>
 
-<div id="privacyBanner" class="privacy-banner">
-  <p>
-    We use session-based visit notifications and registration
-    notifications. Your visit notification is sent only after
-    you accept. We do not collect your passwords or precise
-    location.
-  </p>
-  <div>
-    <button class="gold-btn" onclick="acceptPrivacy()">Accept</button>
-    <button class="outline-btn" onclick="declinePrivacy()">Decline</button>
-  </div>
-</div>
+      </div>
 
-<a class="whatsapp" href="https://wa.me/2349040071415"
-   target="_blank" rel="noopener">
-  <span>☏</span> WhatsApp Support
-</a>
+      <!-- PARTICIPATION INFORMATION -->
+      <section class="panel eligibility">
 
-<footer>
-  <h3>INTERNATIONAL REWARDS</h3>
-  <p>International community rewards demonstration.</p>
-  <p>WhatsApp:
-    <a href="https://wa.me/2349040071415">+2349040071415</a>
-  </p>
-  <p>Email: okoyechamaka@gmail.com</p>
-  <p>© 2026 International Rewards</p>
-</footer>
+        <div>
+          <p class="eyebrow">IMPORTANT INFORMATION</p>
 
-<!-- EmailJS -->
-<script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js"></script>
+          <h2>How participation works</h2>
 
-<script src="script.js"></script>
+          <p class="muted">
+            A membership card or group membership does not
+            guarantee a prize or create a withdrawable cash
+            balance. Publish the official rules, selection
+            method, eligibility, fees (if any), and payout
+            timetable before accepting payments or applications.
+          </p>
+        </div>
+
+        <ul>
+          <li>Read the official programme rules.</li>
+          <li>Submit a membership application for review.</li>
+          <li>
+            Only approved, eligible participants can take part
+            in any prize process.
+          </li>
+        </ul>
+
+      </section>
+
+      <!-- MEMBER PROFILE -->
+      <section class="panel profile-panel">
+
+        <div>
+          <p class="eyebrow">YOUR PROFILE</p>
+          <h2>Member details</h2>
+        </div>
+
+        <div class="profile-grid">
+
+          <div>
+            <small>Full name</small>
+            <b id="profileName">—</b>
+          </div>
+
+          <div>
+            <small>Phone</small>
+            <b id="profilePhone">—</b>
+          </div>
+
+          <div>
+            <small>Gender</small>
+            <b id="profileGender">—</b>
+          </div>
+
+          <div>
+            <small>Session</small>
+            <b>Preview access</b>
+          </div>
+
+        </div>
+
+      </section>
+
+    </section>
+
+  </main>
+
+  <footer>
+    <span>
+      © <span id="year"></span> International Rewards
+    </span>
+
+    <span>
+      Programme information · Support
+    </span>
+  </footer>
+
+  <script src="script.js"></script>
+
 </body>
 </html>
