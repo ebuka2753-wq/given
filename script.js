@@ -1,113 +1,342 @@
 
-// INTERNATIONAL REWARDS
-// Membership page JavaScript
+/*
+ INTERNATIONAL REWARDS
+ Secure Supabase login and withdrawal system
 
-const membershipPrices = {
-  "Normal Community": 500,
-  "Gold Membership": 1000,
-  "Platinum Membership": 1750,
-  "Exclusive Membership": 3550
-};
+ IMPORTANT:
+ 1. Run supabase_setup.sql in Supabase SQL Editor.
+ 2. Configure phone OTP in Supabase.
+ 3. Replace the two Supabase settings below.
+*/
 
-// Get page elements
-const membership = document.getElementById("membership");
-const price = document.getElementById("price");
-const receipt = document.getElementById("receipt");
-const preview = document.getElementById("preview");
-const receiptImage = document.getElementById("receiptImage");
-const membershipForm = document.getElementById("membershipForm");
+// ===================================
+// SUPABASE CONFIGURATION
+// ===================================
 
-// WhatsApp support number
-const whatsappNumber = "2349040071415";
+const SUPABASE_URL = "YOUR_SUPABASE_PROJECT_URL";
+const SUPABASE_ANON_KEY = "YOUR_SUPABASE_ANON_KEY";
 
-// Display membership price
-if (membership) {
-  membership.addEventListener("change", function () {
-    const selected = membership.value;
+const configured =
+  SUPABASE_URL.startsWith("https://") &&
+  !SUPABASE_URL.includes("YOUR_") &&
+  !SUPABASE_ANON_KEY.includes("YOUR_");
 
-    price.textContent = selected
-      ? "$" + membershipPrices[selected].toLocaleString("en-US")
-      : "$0";
+const supabaseClient = configured
+  ? window.supabase.createClient(
+      SUPABASE_URL,
+      SUPABASE_ANON_KEY
+    )
+  : null;
+
+
+// ===================================
+// HELPER FUNCTIONS
+// ===================================
+
+const $ = (id) => document.getElementById(id);
+
+const mainViews = [
+  "loginView",
+  "pinSetupView",
+  "dashboardView"
+];
+
+function showView(id) {
+  mainViews.forEach(view => {
+    $(view).classList.toggle("hidden", view !== id);
   });
 }
 
-// Preview uploaded receipt
-if (receipt) {
-  receipt.addEventListener("change", function () {
-    const file = this.files[0];
-
-    if (!file) {
-      preview.style.display = "none";
-      return;
-    }
-
-    if (!["image/jpeg", "image/png", "image/webp"].includes(file.type)) {
-      alert("Please upload a JPG, PNG or WEBP image.");
-      this.value = "";
-      preview.style.display = "none";
-      return;
-    }
-
-    if (file.size > 5 * 1024 * 1024) {
-      alert("Your image must be smaller than 5MB.");
-      this.value = "";
-      preview.style.display = "none";
-      return;
-    }
-
-    const reader = new FileReader();
-
-    reader.onload = function (event) {
-      receiptImage.src = event.target.result;
-      preview.style.display = "block";
-    };
-
-    reader.readAsDataURL(file);
+function showSubView(id) {
+  document.querySelectorAll(".subview").forEach(view => {
+    view.classList.add("hidden");
   });
+
+  $(id).classList.remove("hidden");
 }
 
-// Submit membership request to WhatsApp
-if (membershipForm) {
-  membershipForm.addEventListener("submit", function (event) {
-    event.preventDefault();
+function checkConfiguration() {
+  if (!supabaseClient) {
+    alert(
+      "Please add your Supabase Project URL and anon key inside script.js."
+    );
+    return false;
+  }
 
-    const name = document.getElementById("fullName").value.trim();
-    const plan = membership.value;
-    const method = document.getElementById("payment").value;
-    const amount = document.getElementById("amount").value;
-    const uploadedFile = receipt.files[0];
-
-    if (!name || !plan || !method || !amount || !uploadedFile) {
-      alert("Please complete all fields.");
-      return;
-    }
-
-    if (!membershipPrices[plan]) {
-      alert("Please select a valid membership.");
-      return;
-    }
-
-    if (Number(amount) <= 0) {
-      alert("Please enter a valid payment amount.");
-      return;
-    }
-
-    const message =
-      "Hello International Rewards Support.\n\n" +
-      "I would like to submit my membership payment for review.\n\n" +
-      "Full name: " + name + "\n" +
-      "Membership: " + plan + "\n" +
-      "Listed price: $" + membershipPrices[plan].toLocaleString("en-US") + "\n" +
-      "Payment method: " + method + "\n" +
-      "Amount paid: $" + Number(amount).toLocaleString("en-US") + "\n\n" +
-      "I will attach my payment receipt manually for review.";
-
-    const whatsappURL =
-      "https://wa.me/" +
-      whatsappNumber +
-      "?text=" +
-      encodeURIComponent(message);
-
-    window.open(whatsappURL, "_blank");
-  });
+  return true;
 }
+
+
+// ===================================
+// PHONE LOGIN
+// ===================================
+
+let pendingPhone = "";
+
+$("sendOtpForm").addEventListener("submit", async function(event) {
+
+  event.preventDefault();
+
+  if (!checkConfiguration()) return;
+
+  const phone = $("phone").value.trim();
+
+  if (!/^\+[1-9]\d{7,14}$/.test(phone)) {
+    alert("Enter your phone number with country code. Example: +234...");
+    return;
+  }
+
+  pendingPhone = phone;
+
+  const fullName = $("fullName").value.trim();
+  const gender = $("gender").value;
+
+  const { error } = await supabaseClient.auth.signInWithOtp({
+
+    phone: pendingPhone,
+
+    options: {
+      shouldCreateUser: true,
+
+      data: {
+        full_name: fullName,
+        gender: gender
+      }
+    }
+
+  });
+
+  if (error) {
+    alert(error.message);
+    return;
+  }
+
+  $("verifyOtpForm").classList.remove("hidden");
+
+  alert("Verification code sent to your phone.");
+
+});
+
+
+// ===================================
+// VERIFY PHONE OTP
+// ===================================
+
+$("verifyOtpForm").addEventListener("submit", async function(event) {
+
+  event.preventDefault();
+
+  const token = $("otp").value.trim();
+
+  const { data, error } = await supabaseClient.auth.verifyOtp({
+
+    phone: pendingPhone,
+    token: token,
+    type: "sms"
+
+  });
+
+  if (error) {
+    alert(error.message);
+    return;
+  }
+
+  $("memberName").textContent =
+    data.user.user_metadata?.full_name || "Member";
+
+  const { data: hasPin, error: pinError } =
+    await supabaseClient.rpc("has_withdrawal_pin");
+
+  if (pinError) {
+    alert("Please run supabase_setup.sql in your Supabase SQL Editor.");
+    return;
+  }
+
+  if (hasPin) {
+    showView("dashboardView");
+  } else {
+    showView("pinSetupView");
+  }
+
+});
+
+
+// ===================================
+// CREATE WITHDRAWAL PIN
+// ===================================
+
+$("pinSetupForm").addEventListener("submit", async function(event) {
+
+  event.preventDefault();
+
+  const pin = $("newPin").value;
+  const confirmPin = $("confirmPin").value;
+
+  if (!/^\d{4}$/.test(pin)) {
+    alert("Your PIN must contain exactly four digits.");
+    return;
+  }
+
+  if (pin !== confirmPin) {
+    alert("Your PINs do not match.");
+    return;
+  }
+
+  const { error } = await supabaseClient.rpc(
+    "set_withdrawal_pin",
+    {
+      p_pin: pin
+    }
+  );
+
+  if (error) {
+    alert(error.message);
+    return;
+  }
+
+  $("newPin").value = "";
+  $("confirmPin").value = "";
+
+  alert("Your withdrawal PIN has been created.");
+
+  showView("dashboardView");
+
+});
+
+
+// ===================================
+// DASHBOARD BUTTONS
+// ===================================
+
+document.querySelectorAll("[data-view]").forEach(button => {
+
+  button.addEventListener("click", function() {
+
+    const target = this.dataset.view;
+
+    showSubView(target);
+
+  });
+
+});
+
+
+// ===================================
+// WITHDRAWAL REQUEST
+// ===================================
+
+$("withdrawForm").addEventListener("submit", async function(event) {
+
+  event.preventDefault();
+
+  if (!checkConfiguration()) return;
+
+  const bankName = $("bankName").value.trim();
+  const accountName = $("accountName").value.trim();
+  const accountNumber = $("accountNumber").value.trim();
+
+  const amount = Number($("withdrawAmount").value);
+
+  const pin = $("withdrawPin").value;
+
+  if (
+    !bankName ||
+    !accountName ||
+    accountNumber.length < 6 ||
+    !Number.isFinite(amount) ||
+    amount <= 0 ||
+    !/^\d{4}$/.test(pin)
+  ) {
+    alert("Please check all your withdrawal details.");
+    return;
+  }
+
+  const { data, error } = await supabaseClient.rpc(
+
+    "submit_withdrawal_request",
+
+    {
+      p_bank_name: bankName,
+      p_account_name: accountName,
+      p_account_number: accountNumber,
+      p_amount: amount,
+      p_pin: pin
+    }
+
+  );
+
+  // Clear PIN from the page immediately.
+  $("withdrawPin").value = "";
+
+  if (error) {
+
+    $("withdrawMessage").textContent = error.message;
+
+    return;
+  }
+
+  $("withdrawMessage").textContent =
+    "Your withdrawal request has been submitted for admin review. Reference: " + data;
+
+  $("withdrawForm").reset();
+
+});
+
+
+// ===================================
+// LOG OUT
+// ===================================
+
+$("logoutButton").addEventListener("click", async function() {
+
+  if (supabaseClient) {
+    const { error } = await supabaseClient.auth.signOut();
+
+    if (error) {
+      alert(error.message);
+      return;
+    }
+  }
+
+  $("verifyOtpForm").classList.add("hidden");
+  $("sendOtpForm").reset();
+  $("verifyOtpForm").reset();
+
+  showView("loginView");
+
+});
+
+
+// ===================================
+// RESTORE EXISTING LOGIN SESSION
+// ===================================
+
+async function restoreSession() {
+
+  if (!supabaseClient) return;
+
+  const {
+    data: { session },
+    error
+  } = await supabaseClient.auth.getSession();
+
+  if (error || !session) return;
+
+  $("memberName").textContent =
+    session.user.user_metadata?.full_name || "Member";
+
+  const { data: hasPin, error: pinError } =
+    await supabaseClient.rpc("has_withdrawal_pin");
+
+  if (pinError) {
+    console.error(pinError.message);
+    return;
+  }
+
+  showView(hasPin ? "dashboardView" : "pinSetupView");
+
+}
+
+
+// Start website
+restoreSession();
